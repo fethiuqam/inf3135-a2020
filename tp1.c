@@ -106,6 +106,36 @@ void test_validerTA_3(void){
     CU_ASSERT_EQUAL(validerTH_3(0), true);
     CU_ASSERT_EQUAL(validerTH_3(-10), true);
 }
+
+void test_validerPulsaion_1(void){
+    CU_ASSERT_EQUAL(validerPulsation_1(50), true);
+    CU_ASSERT_EQUAL(validerPulsation_1(200), true);
+    CU_ASSERT_EQUAL(validerPulsation_1(100), true);
+    CU_ASSERT_EQUAL(validerPulsation_1(49), false);
+    CU_ASSERT_EQUAL(validerPulsation_1(201), false);
+    CU_ASSERT_EQUAL(validerPulsation_1(0), false);
+    CU_ASSERT_EQUAL(validerPulsation_1(-10), false);
+}
+
+void test_validerPulsaion_2(void){
+    CU_ASSERT_EQUAL(validerPulsation_2(50), true);
+    CU_ASSERT_EQUAL(validerPulsation_2(200), true);
+    CU_ASSERT_EQUAL(validerPulsation_2(100), true);
+    CU_ASSERT_EQUAL(validerPulsation_2(49), false);
+    CU_ASSERT_EQUAL(validerPulsation_2(201), false);
+    CU_ASSERT_EQUAL(validerPulsation_2(0), false);
+    CU_ASSERT_EQUAL(validerPulsation_2(-10), false);
+}
+
+void test_validerPulsaion_3(void){
+    CU_ASSERT_EQUAL(validerPulsation_3(50), true);
+    CU_ASSERT_EQUAL(validerPulsation_3(200), true);
+    CU_ASSERT_EQUAL(validerPulsation_3(100), true);
+    CU_ASSERT_EQUAL(validerPulsation_3(49), false);
+    CU_ASSERT_EQUAL(validerPulsation_3(201), false);
+    CU_ASSERT_EQUAL(validerPulsation_3(0), false);
+    CU_ASSERT_EQUAL(validerPulsation_3(-10), false);
+}
 /************* Nous debutons l'execution des tests **************/
 
 int main ( void )
@@ -134,7 +164,10 @@ int main ( void )
         (NULL == CU_add_test(pSuite, "test_validerTH_3", test_validerTH_3)) ||
         (NULL == CU_add_test(pSuite, "test_validerTA_1", test_validerTA_1)) ||
         (NULL == CU_add_test(pSuite, "test_validerTA_2", test_validerTA_2)) ||
-        (NULL == CU_add_test(pSuite, "test_validerTA_3", test_validerTA_3))
+        (NULL == CU_add_test(pSuite, "test_validerTA_3", test_validerTA_3)) ||
+        (NULL == CU_add_test(pSuite, "test_validerPulsation_1", test_validerPulsation_1)) ||
+        (NULL == CU_add_test(pSuite, "test_validerPulsation_2", test_validerPulsation_2)) ||
+        (NULL == CU_add_test(pSuite, "test_validerPulsation_3", test_validerPulsation_3))
     ){
         CU_cleanup_registry();
         return CU_get_error();
