@@ -136,6 +136,37 @@ void test_validerPulsation_3(void){
     CU_ASSERT_EQUAL(validerPulsation_3(0), false);
     CU_ASSERT_EQUAL(validerPulsation_3(-10), false);
 }
+
+void test_validerSignal_1(void){
+    CU_ASSERT_EQUAL(validerSignal_1(-85), true);
+    CU_ASSERT_EQUAL(validerSignal_1(-25), true);
+    CU_ASSERT_EQUAL(validerSignal_1(-45), true);
+    CU_ASSERT_EQUAL(validerSignal_1(-86), false);
+    CU_ASSERT_EQUAL(validerSignal_1(-24), false);
+    CU_ASSERT_EQUAL(validerSignal_1(0), false);
+    CU_ASSERT_EQUAL(validerSignal_1(10), false);
+}
+
+void test_validerSignal_2(void){
+    CU_ASSERT_EQUAL(validerSignal_2(-85), true);
+    CU_ASSERT_EQUAL(validerSignal_2(-25), true);
+    CU_ASSERT_EQUAL(validerSignal_2(-45), true);
+    CU_ASSERT_EQUAL(validerSignal_2(-86), false);
+    CU_ASSERT_EQUAL(validerSignal_2(-24), false);
+    CU_ASSERT_EQUAL(validerSignal_2(0), false);
+    CU_ASSERT_EQUAL(validerSignal_2(10), false);
+}
+
+void test_validerSignal_3(void){
+    CU_ASSERT_EQUAL(validerSignal_3(-85), true);
+    CU_ASSERT_EQUAL(validerSignal_3(-25), true);
+    CU_ASSERT_EQUAL(validerSignal_3(-45), true);
+    CU_ASSERT_EQUAL(validerSignal_3(-86), false);
+    CU_ASSERT_EQUAL(validerSignal_3(-24), false);
+    CU_ASSERT_EQUAL(validerSignal_3(0), false);
+    CU_ASSERT_EQUAL(validerSignal_3(10), false);
+}
+
 /************* Nous debutons l'execution des tests **************/
 
 int main ( void )
@@ -167,7 +198,10 @@ int main ( void )
         (NULL == CU_add_test(pSuite, "test_validerTA_3", test_validerTA_3)) ||
         (NULL == CU_add_test(pSuite, "test_validerPulsation_1", test_validerPulsation_1)) ||
         (NULL == CU_add_test(pSuite, "test_validerPulsation_2", test_validerPulsation_2)) ||
-        (NULL == CU_add_test(pSuite, "test_validerPulsation_3", test_validerPulsation_3))
+        (NULL == CU_add_test(pSuite, "test_validerPulsation_3", test_validerPulsation_3)) ||
+        (NULL == CU_add_test(pSuite, "test_validerSignal_1", test_validerSignal_1)) ||
+        (NULL == CU_add_test(pSuite, "test_validerSignal_2", test_validerSignal_2)) ||
+        (NULL == CU_add_test(pSuite, "test_validerSignal_3", test_validerSignal_3))
     ){
         CU_cleanup_registry();
         return CU_get_error();
