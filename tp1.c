@@ -74,8 +74,38 @@ void test_validerTH_3(void){
     CU_ASSERT_EQUAL(validerTH_3(-10), false);
 }
 
+void test_validerTA_1(void){
+    CU_ASSERT_EQUAL(validerTH_1(-400), true);
+    CU_ASSERT_EQUAL(validerTH_1(400), true);
+    CU_ASSERT_EQUAL(validerTH_1(-410), false);
+    CU_ASSERT_EQUAL(validerTH_1(410), false);
+    CU_ASSERT_EQUAL(validerTH_1(-401), false);
+    CU_ASSERT_EQUAL(validerTH_1(401), false);
+    CU_ASSERT_EQUAL(validerTH_1(0), true);
+    CU_ASSERT_EQUAL(validerTH_1(-10), true);
+}
 
+void test_validerTA_2(void){
+    CU_ASSERT_EQUAL(validerTH_2(-400), true);
+    CU_ASSERT_EQUAL(validerTH_2(400), true);
+    CU_ASSERT_EQUAL(validerTH_2(-410), false);
+    CU_ASSERT_EQUAL(validerTH_2(410), false);
+    CU_ASSERT_EQUAL(validerTH_2(-401), false);
+    CU_ASSERT_EQUAL(validerTH_2(401), false);
+    CU_ASSERT_EQUAL(validerTH_2(0), true);
+    CU_ASSERT_EQUAL(validerTH_2(-10), true);
+}
 
+void test_validerTA_3(void){
+    CU_ASSERT_EQUAL(validerTH_3(-400), true);
+    CU_ASSERT_EQUAL(validerTH_3(400), true);
+    CU_ASSERT_EQUAL(validerTH_3(-410), false);
+    CU_ASSERT_EQUAL(validerTH_3(410), false);
+    CU_ASSERT_EQUAL(validerTH_3(-401), false);
+    CU_ASSERT_EQUAL(validerTH_3(401), false);
+    CU_ASSERT_EQUAL(validerTH_3(0), true);
+    CU_ASSERT_EQUAL(validerTH_3(-10), true);
+}
 /************* Nous debutons l'execution des tests **************/
 
 int main ( void )
@@ -100,8 +130,11 @@ int main ( void )
             )
     {*/
     if ((NULL == CU_add_test(pSuite, "test_validerTH_1", test_validerTH_1)) ||
-        (NULL == CU_add_test(pSuite, "test_validerTH_2", test_validerTH_2) ||
-        (NULL == CU_add_test(pSuite, "test_validerTH_3", test_validerTH_3)
+        (NULL == CU_add_test(pSuite, "test_validerTH_2", test_validerTH_2)) ||
+        (NULL == CU_add_test(pSuite, "test_validerTH_3", test_validerTH_3)) ||
+        (NULL == CU_add_test(pSuite, "test_validerTA_1", test_validerTA_1)) ||
+        (NULL == CU_add_test(pSuite, "test_validerTA_2", test_validerTA_2)) ||
+        (NULL == CU_add_test(pSuite, "test_validerTA_3", test_validerTA_3))
     ){
         CU_cleanup_registry();
         return CU_get_error();
