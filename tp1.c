@@ -71,7 +71,7 @@ int main ( void )
          (NULL == CU_add_test(pSuite, "max_test_3", max_test_trois))
             )
     {*/
-    if ((NULL == CU_add_test(pSuite, "test_validerTH_1", test_validerTH_1())){
+    if ((NULL == CU_add_test(pSuite, "test_validerTH_1", test_validerTH_1))){
         CU_cleanup_registry();
         return CU_get_error();
     }
