@@ -1,8 +1,9 @@
 #include "Basic.h"       // mode de base
 //#include "Automated.h"
 //#include "Console.h"
-#include "max.h"         // declaration de mes fonctions
+#include "tcv.h"         // declaration de mes fonctions
 #include <stdio.h>       // printf
+#include <stdbool.h>
 
 /*****  LES fonctions qui initialise et detruit la "Suite de test" ******/
 
@@ -25,7 +26,7 @@ void test_case_exemple(void)
    CU_ASSERT_STRING_EQUAL("string #1", "string #2");
 }
 */
-void max_test_un(void) {
+/*void max_test_un(void) {
     CU_ASSERT_EQUAL( max(1,2), 2);
     CU_ASSERT_EQUAL( max(2,1), 2);
 }
@@ -38,6 +39,13 @@ void max_test_deux(void) {
 
 void max_test_trois(void) {
     CU_ASSERT_EQUAL( max(-1,-2), -1);
+}*/
+
+void test_validerTH_1(void){
+    CU_ASSERT_EQUAL(validerTH_1(170), true);
+    CU_ASSERT_EQUAL(validerTH_1(400), true);
+    CU_ASSERT_EQUAL(validerTH_1(160), false);
+    CU_ASSERT_EQUAL(validerTH_1(410), false);
 }
 
 /************* Nous debutons l'execution des tests **************/
@@ -58,11 +66,12 @@ int main ( void )
     }
 
     /* add the tests to the suite */
-    if ( (NULL == CU_add_test(pSuite, "max_test_1", max_test_un)) ||
+    /*if ( (NULL == CU_add_test(pSuite, "max_test_1", max_test_un)) ||
          (NULL == CU_add_test(pSuite, "max_test_2", max_test_deux)) ||
          (NULL == CU_add_test(pSuite, "max_test_3", max_test_trois))
             )
-    {
+    {*/
+    if ((NULL == CU_add_test(pSuite, "test_validerTH_1", test_validerTH_1())){
         CU_cleanup_registry();
         return CU_get_error();
     }
