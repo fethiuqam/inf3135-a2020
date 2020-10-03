@@ -107,7 +107,7 @@ void test_validerTA_3(void){
     CU_ASSERT_EQUAL(validerTH_3(-10), true);
 }
 
-void test_validerPulsaion_1(void){
+void test_validerPulsation_1(void){
     CU_ASSERT_EQUAL(validerPulsation_1(50), true);
     CU_ASSERT_EQUAL(validerPulsation_1(200), true);
     CU_ASSERT_EQUAL(validerPulsation_1(100), true);
@@ -117,7 +117,7 @@ void test_validerPulsaion_1(void){
     CU_ASSERT_EQUAL(validerPulsation_1(-10), false);
 }
 
-void test_validerPulsaion_2(void){
+void test_validerPulsation_2(void){
     CU_ASSERT_EQUAL(validerPulsation_2(50), true);
     CU_ASSERT_EQUAL(validerPulsation_2(200), true);
     CU_ASSERT_EQUAL(validerPulsation_2(100), true);
@@ -127,7 +127,7 @@ void test_validerPulsaion_2(void){
     CU_ASSERT_EQUAL(validerPulsation_2(-10), false);
 }
 
-void test_validerPulsaion_3(void){
+void test_validerPulsation_3(void){
     CU_ASSERT_EQUAL(validerPulsation_3(50), true);
     CU_ASSERT_EQUAL(validerPulsation_3(200), true);
     CU_ASSERT_EQUAL(validerPulsation_3(100), true);
