@@ -46,7 +46,35 @@ void test_validerTH_1(void){
     CU_ASSERT_EQUAL(validerTH_1(400), true);
     CU_ASSERT_EQUAL(validerTH_1(160), false);
     CU_ASSERT_EQUAL(validerTH_1(410), false);
+    CU_ASSERT_EQUAL(validerTH_1(169), false);
+    CU_ASSERT_EQUAL(validerTH_1(401), false);
+    CU_ASSERT_EQUAL(validerTH_1(0), false);
+    CU_ASSERT_EQUAL(validerTH_1(-10), false);
 }
+
+void test_validerTH_2(void){
+    CU_ASSERT_EQUAL(validerTH_2(170), true);
+    CU_ASSERT_EQUAL(validerTH_2(400), true);
+    CU_ASSERT_EQUAL(validerTH_2(160), false);
+    CU_ASSERT_EQUAL(validerTH_2(410), false);
+    CU_ASSERT_EQUAL(validerTH_2(169), false);
+    CU_ASSERT_EQUAL(validerTH_2(401), false);
+    CU_ASSERT_EQUAL(validerTH_2(0), false);
+    CU_ASSERT_EQUAL(validerTH_2(-10), false);
+}
+
+void test_validerTH_3(void){
+    CU_ASSERT_EQUAL(validerTH_3(170), true);
+    CU_ASSERT_EQUAL(validerTH_3(400), true);
+    CU_ASSERT_EQUAL(validerTH_3(160), false);
+    CU_ASSERT_EQUAL(validerTH_3(410), false);
+    CU_ASSERT_EQUAL(validerTH_3(169), false);
+    CU_ASSERT_EQUAL(validerTH_3(401), false);
+    CU_ASSERT_EQUAL(validerTH_3(0), false);
+    CU_ASSERT_EQUAL(validerTH_3(-10), false);
+}
+
+
 
 /************* Nous debutons l'execution des tests **************/
 
@@ -71,7 +99,10 @@ int main ( void )
          (NULL == CU_add_test(pSuite, "max_test_3", max_test_trois))
             )
     {*/
-    if ((NULL == CU_add_test(pSuite, "test_validerTH_1", test_validerTH_1))){
+    if ((NULL == CU_add_test(pSuite, "test_validerTH_1", test_validerTH_1)) ||
+        (NULL == CU_add_test(pSuite, "test_validerTH_2", test_validerTH_2) ||
+        (NULL == CU_add_test(pSuite, "test_validerTH_3", test_validerTH_3)
+    ){
         CU_cleanup_registry();
         return CU_get_error();
     }
