@@ -2,6 +2,7 @@
 *.o
 *.out
 tp1
+tcv.h
 # Fichiers Vim
 *.swo
 *.swp
