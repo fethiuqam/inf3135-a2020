@@ -53,14 +53,15 @@ void test_validerTH_1(void){
 }
 
 void test_validerTH_2(void){
-    CU_ASSERT_EQUAL(validerTH_2(170), true);
-    CU_ASSERT_EQUAL(validerTH_2(400), true);
-    CU_ASSERT_EQUAL(validerTH_2(160), false);
-    CU_ASSERT_EQUAL(validerTH_2(410), false);
-    CU_ASSERT_EQUAL(validerTH_2(169), false);
-    CU_ASSERT_EQUAL(validerTH_2(401), false);
+    CU_ASSERT_EQUAL(validerTH_2(127), false);
+    //CU_ASSERT_EQUAL(validerTH_2(400), true);
+    //CU_ASSERT_EQUAL(validerTH_2(160), false);
+    //CU_ASSERT_EQUAL(validerTH_2(410), false);
+    //CU_ASSERT_EQUAL(validerTH_2(169), false);
+    //U_ASSERT_EQUAL(validerTH_2(401), false);
     CU_ASSERT_EQUAL(validerTH_2(0), false);
     CU_ASSERT_EQUAL(validerTH_2(-10), false);
+    CU_ASSERT_EQUAL(validerTH_2(-128), false);
 }
 
 void test_validerTH_3(void){
@@ -86,14 +87,14 @@ void test_validerTA_1(void){
 }
 
 void test_validerTA_2(void){
-    CU_ASSERT_EQUAL(validerTH_2(-400), true);
-    CU_ASSERT_EQUAL(validerTH_2(400), true);
-    CU_ASSERT_EQUAL(validerTH_2(-410), false);
-    CU_ASSERT_EQUAL(validerTH_2(410), false);
-    CU_ASSERT_EQUAL(validerTH_2(-401), false);
-    CU_ASSERT_EQUAL(validerTH_2(401), false);
+    CU_ASSERT_EQUAL(validerTH_2(-128), true);
+    CU_ASSERT_EQUAL(validerTH_2(127), true);
+    //CU_ASSERT_EQUAL(validerTH_2(-410), false);
+    //CU_ASSERT_EQUAL(validerTH_2(410), false);
+    //CU_ASSERT_EQUAL(validerTH_2(-401), false);
+    //CU_ASSERT_EQUAL(validerTH_2(401), false);
     CU_ASSERT_EQUAL(validerTH_2(0), true);
-    CU_ASSERT_EQUAL(validerTH_2(-10), true);
+    //CU_ASSERT_EQUAL(validerTH_2(-10), true);
 }
 
 void test_validerTA_3(void){
@@ -119,10 +120,10 @@ void test_validerPulsation_1(void){
 
 void test_validerPulsation_2(void){
     CU_ASSERT_EQUAL(validerPulsation_2(50), true);
-    CU_ASSERT_EQUAL(validerPulsation_2(200), true);
-    CU_ASSERT_EQUAL(validerPulsation_2(100), true);
+    CU_ASSERT_EQUAL(validerPulsation_2(127), true);
+    //CU_ASSERT_EQUAL(validerPulsation_2(100), true);
     CU_ASSERT_EQUAL(validerPulsation_2(49), false);
-    CU_ASSERT_EQUAL(validerPulsation_2(201), false);
+    //CU_ASSERT_EQUAL(validerPulsation_2(201), false);
     CU_ASSERT_EQUAL(validerPulsation_2(0), false);
     CU_ASSERT_EQUAL(validerPulsation_2(-10), false);
 }
