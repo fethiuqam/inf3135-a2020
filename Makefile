@@ -9,7 +9,7 @@ $(FILENAME) : $(FILENAME).c lib
 	gcc $(CFLAGS) -I$(CUNIT_H) -L$(CUNIT_LIB)  -o $(FILENAME) $(FILENAME).c $(SOURCE).o -lcunit
 
 lib :
-	mkdir -p 'data' && wget -P ./data/ https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip && unzip ./data/tp1.zip -d ./ && rm -rf data
+	mkdir -p 'data' && wget -P ./data/ https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip && unzip -o ./data/tp1.zip -d ./ && rm -rf data
 
 test : $(FILENAME)
 	./tp1
