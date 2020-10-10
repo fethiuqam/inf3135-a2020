@@ -17,4 +17,4 @@ test : $(FILENAME)
 .PHONY: clean
 
 clean :
-	rm -f $(FILENAME) $(FILENAME).o
+	rm -f $(FILENAME) $(FILENAME).o $(SOURCE).o $(SOURCE).h
