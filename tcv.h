@@ -3,6 +3,15 @@
 
 #include <stdbool.h>
 
+typedef struct version_s {
+  unsigned char major;
+  unsigned char minor;
+  unsigned int  build;
+} version_t;
+
+void getVersion(version_t *v);
+
+
 bool validerTH_1(int);
 bool validerTH_2(char);
 bool validerTH_3(short);
