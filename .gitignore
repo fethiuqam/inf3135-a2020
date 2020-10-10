@@ -2,8 +2,6 @@
 *.o
 *.out
 tp1
-# inclure tvc.o pour la compilation
-!tcv.o
 # Fichiers Vim
 *.swo
 *.swp
@@ -17,3 +15,4 @@ tp1
 bin/
 build/
 .idea/
+data/
