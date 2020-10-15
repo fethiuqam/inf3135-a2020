@@ -1,6 +1,4 @@
 #include "Basic.h"       // mode de base
-//#include "Automated.h"
-//#include "Console.h"
 #include "tcv.h"         // declaration de mes fonctions
 #include <stdio.h>       // printf
 #include <stdbool.h>
@@ -10,36 +8,7 @@
 int init_suite(void) { return 0; }
 int clean_suite(void) { return 0; }
 
-/********************* NOS fonctions de tests *********************/
-/*
-void test_case_exemple(void)
-{
-   // Les types d'assertions disponibles
-   CU_ASSERT(CU_TRUE);
-   CU_ASSERT_NOT_EQUAL(2, -1);
-   CU_ASSERT_STRING_EQUAL("string #1", "string #1");
-   CU_ASSERT_STRING_NOT_EQUAL("string #1", "string #2");
-
-   CU_ASSERT(CU_FALSE);
-   CU_ASSERT_EQUAL(2, 3);
-   CU_ASSERT_STRING_NOT_EQUAL("string #1", "string #1");
-   CU_ASSERT_STRING_EQUAL("string #1", "string #2");
-}
-*/
-/*void max_test_un(void) {
-    CU_ASSERT_EQUAL( max(1,2), 2);
-    CU_ASSERT_EQUAL( max(2,1), 2);
-}
-
-void max_test_deux(void) {
-    CU_ASSERT_EQUAL( max(2,2), 2);
-    CU_ASSERT_EQUAL( max(0,0), 0);
-    CU_ASSERT_EQUAL( max(-1,-1), -1);
-}
-
-void max_test_trois(void) {
-    CU_ASSERT_EQUAL( max(-1,-2), -1);
-}*/
+/********************* Fonctions de tests *********************/
 
 void test_validerTH_1(void){
     CU_ASSERT_EQUAL(validerTH_1(170), true);
@@ -54,11 +23,6 @@ void test_validerTH_1(void){
 
 void test_validerTH_2(void){
     CU_ASSERT_EQUAL(validerTH_2(127), false);
-    //CU_ASSERT_EQUAL(validerTH_2(400), true);
-    //CU_ASSERT_EQUAL(validerTH_2(160), false);
-    //CU_ASSERT_EQUAL(validerTH_2(410), false);
-    //CU_ASSERT_EQUAL(validerTH_2(169), false);
-    //U_ASSERT_EQUAL(validerTH_2(401), false);
     CU_ASSERT_EQUAL(validerTH_2(0), false);
     CU_ASSERT_EQUAL(validerTH_2(-10), false);
     CU_ASSERT_EQUAL(validerTH_2(-128), false);
@@ -89,12 +53,8 @@ void test_validerTA_1(void){
 void test_validerTA_2(void){
     CU_ASSERT_EQUAL(validerTH_2(-128), true);
     CU_ASSERT_EQUAL(validerTH_2(127), true);
-    //CU_ASSERT_EQUAL(validerTH_2(-410), false);
-    //CU_ASSERT_EQUAL(validerTH_2(410), false);
-    //CU_ASSERT_EQUAL(validerTH_2(-401), false);
-    //CU_ASSERT_EQUAL(validerTH_2(401), false);
     CU_ASSERT_EQUAL(validerTH_2(0), true);
-    //CU_ASSERT_EQUAL(validerTH_2(-10), true);
+
 }
 
 void test_validerTA_3(void){
@@ -121,9 +81,7 @@ void test_validerPulsation_1(void){
 void test_validerPulsation_2(void){
     CU_ASSERT_EQUAL(validerPulsation_2(50), true);
     CU_ASSERT_EQUAL(validerPulsation_2(127), true);
-    //CU_ASSERT_EQUAL(validerPulsation_2(100), true);
     CU_ASSERT_EQUAL(validerPulsation_2(49), false);
-    //CU_ASSERT_EQUAL(validerPulsation_2(201), false);
     CU_ASSERT_EQUAL(validerPulsation_2(0), false);
     CU_ASSERT_EQUAL(validerPulsation_2(-10), false);
 }
@@ -186,11 +144,6 @@ int main ( void )
     }
 
     /* add the tests to the suite */
-    /*if ( (NULL == CU_add_test(pSuite, "max_test_1", max_test_un)) ||
-         (NULL == CU_add_test(pSuite, "max_test_2", max_test_deux)) ||
-         (NULL == CU_add_test(pSuite, "max_test_3", max_test_trois))
-            )
-    {*/
     if ((NULL == CU_add_test(pSuite, "test_validerTH_1", test_validerTH_1)) ||
         (NULL == CU_add_test(pSuite, "test_validerTH_2", test_validerTH_2)) ||
         (NULL == CU_add_test(pSuite, "test_validerTH_3", test_validerTH_3)) ||
@@ -211,18 +164,10 @@ int main ( void )
     // Run all tests using the basic interface
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_basic_run_tests();
-    //printf("\n");
-    //CU_basic_show_failures(CU_get_failure_list());
-    //printf("\n\n");
-/*
-   // LES modes interactifs
-   // Run all tests using the automated interface
-   CU_automated_run_tests();
-   CU_list_tests_to_file();
+    printf("\n");
+    CU_basic_show_failures(CU_get_failure_list());
+    printf("\n\n");
 
-   // Run all tests using the console interface
-   CU_console_run_tests();
-*/
     /* Clean up registry and return */
     CU_cleanup_registry();
     return CU_get_error();
