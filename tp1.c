@@ -6,154 +6,135 @@
 /*****  LES fonctions qui initialise et detruit la "Suite de test" ******/
 
 int init_suite(void) { return 0; }
+
 int clean_suite(void) { return 0; }
 
 /********************* Fonctions de tests *********************/
 
-void test_validerTH_1(void){
-
-	for (int i = -2147483648 ; i < 2147483647 ; ++i){
-		if (i < 170 || i > 400){
-			CU_ASSERT_EQUAL(validerTH_1(i), false);
-		} else {
-    			CU_ASSERT_EQUAL(validerTH_1(i), true);
-		}
-	}
-
-    /*CU_ASSERT_EQUAL(validerTH_1(170), true);
-    CU_ASSERT_EQUAL(validerTH_1(400), true);
-    CU_ASSERT_EQUAL(validerTH_1(200), true);
-    CU_ASSERT_EQUAL(validerTH_1(160), false);
-    CU_ASSERT_EQUAL(validerTH_1(410), false);
-    CU_ASSERT_EQUAL(validerTH_1(169), false);
-    CU_ASSERT_EQUAL(validerTH_1(401), false);
-    CU_ASSERT_EQUAL(validerTH_1(0), false);
-    CU_ASSERT_EQUAL(validerTH_1(-10), false);*/
+void test_validerTH_1(void) {
+    for (int i = -2147483648; i < 2147483647; ++i) {
+        if (i < 170 || i > 400) {
+            CU_ASSERT_EQUAL(validerTH_1(i), false);
+        } else {
+            CU_ASSERT_EQUAL(validerTH_1(i), true);
+        }
+    }
 }
 
-void test_validerTH_2(void){
-    CU_ASSERT_EQUAL(validerTH_2(17), true);
-    CU_ASSERT_EQUAL(validerTH_2(40), true);
-    CU_ASSERT_EQUAL(validerTH_2(127), false);
-    CU_ASSERT_EQUAL(validerTH_2(0), false);
-    CU_ASSERT_EQUAL(validerTH_2(-10), false);
-    CU_ASSERT_EQUAL(validerTH_2(-128), false);
+void test_validerTH_2(void) {
+    for (int i = -128; i < 127; ++i) {
+        CU_ASSERT_EQUAL(validerTH_2(i), false);
+    }
 }
 
-void test_validerTH_3(void){
-    CU_ASSERT_EQUAL(validerTH_3(200), true);
-    CU_ASSERT_EQUAL(validerTH_3(170), true);
-    CU_ASSERT_EQUAL(validerTH_3(400), true);
-    CU_ASSERT_EQUAL(validerTH_3(160), false);
-    CU_ASSERT_EQUAL(validerTH_3(410), false);
-    CU_ASSERT_EQUAL(validerTH_3(169), false);
-    CU_ASSERT_EQUAL(validerTH_3(401), false);
-    CU_ASSERT_EQUAL(validerTH_3(0), false);
-    CU_ASSERT_EQUAL(validerTH_3(-10), false);
+void test_validerTH_3(void) {
+    for (int i = -32768; i < 32767; ++i) {
+        if (i < 170 || i > 400) {
+            CU_ASSERT_EQUAL(validerTH_3(i), false);
+        } else {
+            CU_ASSERT_EQUAL(validerTH_3(i), true);
+        }
+    }
 }
 
-void test_validerTA_1(void){
-    CU_ASSERT_EQUAL(validerTH_1(-400), true);
-    CU_ASSERT_EQUAL(validerTH_1(400), true);
-    CU_ASSERT_EQUAL(validerTH_1(-410), false);
-    CU_ASSERT_EQUAL(validerTH_1(410), false);
-    CU_ASSERT_EQUAL(validerTH_1(-401), false);
-    CU_ASSERT_EQUAL(validerTH_1(401), false);
-    CU_ASSERT_EQUAL(validerTH_1(0), true);
-    CU_ASSERT_EQUAL(validerTH_1(-10), true);
+void test_validerTA_1(void) {
+    for (int i = -2147483648; i < 2147483647; ++i) {
+        if (i < -400 || i > 400) {
+            CU_ASSERT_EQUAL(validerTA_1(i), false);
+        } else {
+            CU_ASSERT_EQUAL(validerTA_1(i), true);
+        }
+    }
 }
 
-void test_validerTA_2(void){
-    CU_ASSERT_EQUAL(validerTH_2(-40), true);
-    CU_ASSERT_EQUAL(validerTH_2(40), true);
-    CU_ASSERT_EQUAL(validerTH_2(-128), false);
-    CU_ASSERT_EQUAL(validerTH_2(127), false);
-    CU_ASSERT_EQUAL(validerTH_2(0), true);
-
+void test_validerTA_2(void) {
+    for (int i = -128; i < 127; ++i) {
+        CU_ASSERT_EQUAL(validerTA_2(i), true);
+    }
 }
 
-void test_validerTA_3(void){
-    CU_ASSERT_EQUAL(validerTH_3(-400), true);
-    CU_ASSERT_EQUAL(validerTH_3(400), true);
-    CU_ASSERT_EQUAL(validerTH_3(-410), false);
-    CU_ASSERT_EQUAL(validerTH_3(410), false);
-    CU_ASSERT_EQUAL(validerTH_3(-401), false);
-    CU_ASSERT_EQUAL(validerTH_3(401), false);
-    CU_ASSERT_EQUAL(validerTH_3(0), true);
-    CU_ASSERT_EQUAL(validerTH_3(-10), true);
+void test_validerTA_3(void) {
+    for (int i = -32768; i < 32767; ++i) {
+        if (i < -400 || i > 400) {
+            CU_ASSERT_EQUAL(validerTA_3(i), false);
+        } else {
+            CU_ASSERT_EQUAL(validerTA_3(i), true);
+        }
+    }
 }
 
-void test_validerPulsation_1(void){
-    CU_ASSERT_EQUAL(validerPulsation_1(50), true);
-    CU_ASSERT_EQUAL(validerPulsation_1(200), true);
-    CU_ASSERT_EQUAL(validerPulsation_1(100), true);
-    CU_ASSERT_EQUAL(validerPulsation_1(49), false);
-    CU_ASSERT_EQUAL(validerPulsation_1(201), false);
-    CU_ASSERT_EQUAL(validerPulsation_1(0), false);
-    CU_ASSERT_EQUAL(validerPulsation_1(-10), false);
+void test_validerPulsation_1(void) {
+    for (int i = -2147483648; i < 2147483647; ++i) {
+        if (i < 50 || i > 200) {
+            CU_ASSERT_EQUAL(validerPulsation_1(i), false);
+        } else {
+            CU_ASSERT_EQUAL(validerPulsation_1(i), true);
+        }
+    }
 }
 
-void test_validerPulsation_2(void){
-    CU_ASSERT_EQUAL(validerPulsation_2(50), true);
-    CU_ASSERT_EQUAL(validerPulsation_2(127), true);
-    CU_ASSERT_EQUAL(validerPulsation_2(49), false);
-    CU_ASSERT_EQUAL(validerPulsation_2(0), false);
-    CU_ASSERT_EQUAL(validerPulsation_2(-10), false);
+void test_validerPulsation_2(void) {
+    for (int i = -128; i < 127; ++i) {
+        if (i < 50) {
+            CU_ASSERT_EQUAL(validerPulsation_2(i), false);
+        } else {
+            CU_ASSERT_EQUAL(validerPulsation_2(i), true);
+        }
+    }
 }
 
-void test_validerPulsation_3(void){
-    CU_ASSERT_EQUAL(validerPulsation_3(50), true);
-    CU_ASSERT_EQUAL(validerPulsation_3(200), true);
-    CU_ASSERT_EQUAL(validerPulsation_3(100), true);
-    CU_ASSERT_EQUAL(validerPulsation_3(49), false);
-    CU_ASSERT_EQUAL(validerPulsation_3(201), false);
-    CU_ASSERT_EQUAL(validerPulsation_3(0), false);
-    CU_ASSERT_EQUAL(validerPulsation_3(-10), false);
+void test_validerPulsation_3(void) {
+    for (int i = -32768; i < 32767; ++i) {
+        if (i < 50 || i > 200) {
+            CU_ASSERT_EQUAL(validerPulsation_3(i), false);
+        } else {
+            CU_ASSERT_EQUAL(validerPulsation_3(i), true);
+        }
+    }
 }
 
-void test_validerSignal_1(void){
-    CU_ASSERT_EQUAL(validerSignal_1(-85), true);
-    CU_ASSERT_EQUAL(validerSignal_1(-25), true);
-    CU_ASSERT_EQUAL(validerSignal_1(-45), true);
-    CU_ASSERT_EQUAL(validerSignal_1(-86), false);
-    CU_ASSERT_EQUAL(validerSignal_1(-24), false);
-    CU_ASSERT_EQUAL(validerSignal_1(0), false);
-    CU_ASSERT_EQUAL(validerSignal_1(10), false);
+void test_validerSignal_1(void) {
+    for (int i = -2147483648; i < 2147483647; ++i) {
+        if (i < -85 || i > -25) {
+            CU_ASSERT_EQUAL(validerSignal_1(i), false);
+        } else {
+            CU_ASSERT_EQUAL(validerSignal_1(i), true);
+        }
+    }
 }
 
-void test_validerSignal_2(void){
-    CU_ASSERT_EQUAL(validerSignal_2(-85), true);
-    CU_ASSERT_EQUAL(validerSignal_2(-25), true);
-    CU_ASSERT_EQUAL(validerSignal_2(-45), true);
-    CU_ASSERT_EQUAL(validerSignal_2(-86), false);
-    CU_ASSERT_EQUAL(validerSignal_2(-24), false);
-    CU_ASSERT_EQUAL(validerSignal_2(0), false);
-    CU_ASSERT_EQUAL(validerSignal_2(10), false);
+void test_validerSignal_2(void) {
+    for (int i = -128; i < 127; ++i) {
+        if (i < -85 || i > -25) {
+            CU_ASSERT_EQUAL(validerSignal_2(i), false);
+        } else {
+            CU_ASSERT_EQUAL(validerSignal_2(i), true);
+        }
+    }
 }
 
-void test_validerSignal_3(void){
-    CU_ASSERT_EQUAL(validerSignal_3(-85), true);
-    CU_ASSERT_EQUAL(validerSignal_3(-25), true);
-    CU_ASSERT_EQUAL(validerSignal_3(-45), true);
-    CU_ASSERT_EQUAL(validerSignal_3(-86), false);
-    CU_ASSERT_EQUAL(validerSignal_3(-24), false);
-    CU_ASSERT_EQUAL(validerSignal_3(0), false);
-    CU_ASSERT_EQUAL(validerSignal_3(10), false);
+void test_validerSignal_3(void) {
+    for (int i = -32768; i < 32767; ++i) {
+        if (i < -85 || i > -25) {
+            CU_ASSERT_EQUAL(validerSignal_3(i), false);
+        } else {
+            CU_ASSERT_EQUAL(validerSignal_3(i), true);
+        }
+    }
 }
 
 /************* Nous debutons l'execution des tests **************/
 
-int main ( void )
-{
+int main(void) {
     CU_pSuite pSuite = NULL;
 
     /* initialize the CUnit test registry */
-    if ( CUE_SUCCESS != CU_initialize_registry() )
+    if (CUE_SUCCESS != CU_initialize_registry())
         return CU_get_error();
 
     /* add a suite to the registry */
-    pSuite = CU_add_suite( "max_test_suite", init_suite, clean_suite );
-    if ( NULL == pSuite ) {
+    pSuite = CU_add_suite("max_test_suite", init_suite, clean_suite);
+    if (NULL == pSuite) {
         CU_cleanup_registry();
         return CU_get_error();
     }
@@ -171,7 +152,7 @@ int main ( void )
         (NULL == CU_add_test(pSuite, "test_validerSignal_1", test_validerSignal_1)) ||
         (NULL == CU_add_test(pSuite, "test_validerSignal_2", test_validerSignal_2)) ||
         (NULL == CU_add_test(pSuite, "test_validerSignal_3", test_validerSignal_3))
-    ){
+            ) {
         CU_cleanup_registry();
         return CU_get_error();
     }
