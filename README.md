@@ -27,7 +27,7 @@
    
    Ce qui va telecharger les fichiers sources `tvc.h` et `tvc.o` qui sont nécessaires pour la compilation qui va suivre le téléchargement, puis l'exécution du programme tp1 qui va donner le résultat :
    ~~~~
-           
+   
      CUnit - A unit testing framework for C - Version 2.1-3
      http://cunit.sourceforge.net/
 
@@ -36,44 +36,21 @@ Suite: max_test_suite
   Test: test_validerTH_1 ...passed
   Test: test_validerTH_2 ...passed
   Test: test_validerTH_3 ...FAILED
-    1. tp1.c:68  - CU_ASSERT_EQUAL(validerTH_3(170),true)
-    2. tp1.c:69  - CU_ASSERT_EQUAL(validerTH_3(400),true)
+    1. tp1.c:35  - CU_ASSERT_EQUAL(validerTH_3(i),true)
+    2. tp1.c:35  - CU_ASSERT_EQUAL(validerTH_3(i),true)
   Test: test_validerTA_1 ...FAILED
-    1. tp1.c:79  - CU_ASSERT_EQUAL(validerTH_1(-400),true)
-    2. tp1.c:85  - CU_ASSERT_EQUAL(validerTH_1(0),true)
-    3. tp1.c:86  - CU_ASSERT_EQUAL(validerTH_1(-10),true)
-  Test: test_validerTA_2 ...FAILED
-    1. tp1.c:90  - CU_ASSERT_EQUAL(validerTH_2(-128),true)
-    2. tp1.c:91  - CU_ASSERT_EQUAL(validerTH_2(127),true)
-    3. tp1.c:96  - CU_ASSERT_EQUAL(validerTH_2(0),true)
-  Test: test_validerTA_3 ...FAILED
-    1. tp1.c:101  - CU_ASSERT_EQUAL(validerTH_3(-400),true)
-    2. tp1.c:102  - CU_ASSERT_EQUAL(validerTH_3(400),true)
-    3. tp1.c:107  - CU_ASSERT_EQUAL(validerTH_3(0),true)
-    4. tp1.c:108  - CU_ASSERT_EQUAL(validerTH_3(-10),true)
-  Test: test_validerPulsation_1 ...FAILED
-    1. tp1.c:112  - CU_ASSERT_EQUAL(validerPulsation_1(50),true)
-    2. tp1.c:113  - CU_ASSERT_EQUAL(validerPulsation_1(200),true)
-  Test: test_validerPulsation_2 ...FAILED
-    1. tp1.c:122  - CU_ASSERT_EQUAL(validerPulsation_2(50),true)
-    2. tp1.c:123  - CU_ASSERT_EQUAL(validerPulsation_2(127),true)
-  Test: test_validerPulsation_3 ...passed
-  Test: test_validerSignal_1 ...FAILED
-    1. tp1.c:142  - CU_ASSERT_EQUAL(validerSignal_1(-85),true)
-    2. tp1.c:143  - CU_ASSERT_EQUAL(validerSignal_1(-25),true)
-  Test: test_validerSignal_2 ...passed
-  Test: test_validerSignal_3 ...FAILED
-    1. tp1.c:162  - CU_ASSERT_EQUAL(validerSignal_3(-85),true)
-    2. tp1.c:163  - CU_ASSERT_EQUAL(validerSignal_3(-25),true)
-    3. tp1.c:164  - CU_ASSERT_EQUAL(validerSignal_3(-45),true)
-
-Run Summary:    Type  Total    Ran Passed Failed Inactive
-              suites      1      1    n/a      0        0
-               tests     12     12      4      8        0
-             asserts     79     79     58     21      n/a
-
-Elapsed time =    0.000 seconds
-
+    1. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
+    2. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
+    3. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
+    4. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
+    5. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
+    6. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
+    7. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
+    8. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
+    9. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
+    10. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
+    11. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
+    ...
    ~~~~
 
 Pour filtrer les résultats des tests en affichant que les fonctions qui réussissent, on peut lancer la commande après compilation :
@@ -87,9 +64,10 @@ Ce qui va afficher comme résultat :
    ~~~~
        test_validerTH_1
        test_validerTH_2
+       test_validerTA_2
+       test_validerTA_3
        test_validerPulsation_3
        test_validerSignal_2
-
    ~~~~
 
    ## Contenu du projet
