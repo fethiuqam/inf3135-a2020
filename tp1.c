@@ -12,6 +12,7 @@ int clean_suite(void) { return 0; }
 /********************* Fonctions de tests *********************/
 
 void test_validerTH_1(void) {
+    // balayage des valeurs int de -100000 a 100000 pour des raisons de temps d'execution
     for (int i = -100000; i < 100000; ++i) {
         if (i < 170 || i > 400) {
             CU_ASSERT_EQUAL(validerTH_1(i), false);
@@ -20,7 +21,8 @@ void test_validerTH_1(void) {
         }
     }
 }
-
+// la fonction validerTH_2 n'est pas fiable meme si elle passe le test
+// elle retourne toujours false car elle ne pourra pas valider une temperature superieur a 12.7
 void test_validerTH_2(void) {
     for (int i = -128; i < 127; ++i) {
         CU_ASSERT_EQUAL(validerTH_2(i), false);
@@ -37,6 +39,7 @@ void test_validerTH_3(void) {
     }
 }
 
+// balayage des valeurs int de -100000 a 100000 pour des raisons de temps d'execution
 void test_validerTA_1(void) {
     for (int i = -100000; i < 100000; ++i) {
         if (i < -400 || i > 400) {
@@ -47,6 +50,8 @@ void test_validerTA_1(void) {
     }
 }
 
+// la fonction validerTA_2 n'est pas fiable meme si elle passe le test
+// elle retourne toujours true car elle ne pourra pas valider une temperature inferieure a -40 ou superieure a 40
 void test_validerTA_2(void) {
     for (int i = -128; i < 127; ++i) {
         CU_ASSERT_EQUAL(validerTA_2(i), true);
@@ -63,6 +68,7 @@ void test_validerTA_3(void) {
     }
 }
 
+// balayage des valeurs int de -100000 a 100000 pour des raisons de temps d'execution
 void test_validerPulsation_1(void) {
     for (int i = -100000; i < 100000; ++i) {
         if (i < 50 || i > 200) {
@@ -72,7 +78,8 @@ void test_validerPulsation_1(void) {
         }
     }
 }
-
+// la fonction validerPulsation_2 n'est pas fiable meme si elle passe le test
+// elle ne pourra pas valider une pulsation superieur a 127
 void test_validerPulsation_2(void) {
     for (int i = -128; i < 127; ++i) {
         if (i < 50) {
@@ -93,6 +100,7 @@ void test_validerPulsation_3(void) {
     }
 }
 
+// balayage des valeurs int de -100000 a 100000 pour des raisons de temps d'execution
 void test_validerSignal_1(void) {
     for (int i = -100000; i < 100000; ++i) {
         if (i < -85 || i > -25) {
