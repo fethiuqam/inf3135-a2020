@@ -11,17 +11,29 @@ int clean_suite(void) { return 0; }
 /********************* Fonctions de tests *********************/
 
 void test_validerTH_1(void){
-    CU_ASSERT_EQUAL(validerTH_1(170), true);
+
+	for (int i = -2147483648 ; i < 2147483647 ; ++i){
+		if (i < 170 || i > 400){
+			CU_ASSERT_EQUAL(validerTH_1(i), false);
+		} else {
+    			CU_ASSERT_EQUAL(validerTH_1(i), true);
+		}
+	}
+
+    /*CU_ASSERT_EQUAL(validerTH_1(170), true);
     CU_ASSERT_EQUAL(validerTH_1(400), true);
+    CU_ASSERT_EQUAL(validerTH_1(200), true);
     CU_ASSERT_EQUAL(validerTH_1(160), false);
     CU_ASSERT_EQUAL(validerTH_1(410), false);
     CU_ASSERT_EQUAL(validerTH_1(169), false);
     CU_ASSERT_EQUAL(validerTH_1(401), false);
     CU_ASSERT_EQUAL(validerTH_1(0), false);
-    CU_ASSERT_EQUAL(validerTH_1(-10), false);
+    CU_ASSERT_EQUAL(validerTH_1(-10), false);*/
 }
 
 void test_validerTH_2(void){
+    CU_ASSERT_EQUAL(validerTH_2(17), true);
+    CU_ASSERT_EQUAL(validerTH_2(40), true);
     CU_ASSERT_EQUAL(validerTH_2(127), false);
     CU_ASSERT_EQUAL(validerTH_2(0), false);
     CU_ASSERT_EQUAL(validerTH_2(-10), false);
@@ -29,6 +41,7 @@ void test_validerTH_2(void){
 }
 
 void test_validerTH_3(void){
+    CU_ASSERT_EQUAL(validerTH_3(200), true);
     CU_ASSERT_EQUAL(validerTH_3(170), true);
     CU_ASSERT_EQUAL(validerTH_3(400), true);
     CU_ASSERT_EQUAL(validerTH_3(160), false);
@@ -51,8 +64,10 @@ void test_validerTA_1(void){
 }
 
 void test_validerTA_2(void){
-    CU_ASSERT_EQUAL(validerTH_2(-128), true);
-    CU_ASSERT_EQUAL(validerTH_2(127), true);
+    CU_ASSERT_EQUAL(validerTH_2(-40), true);
+    CU_ASSERT_EQUAL(validerTH_2(40), true);
+    CU_ASSERT_EQUAL(validerTH_2(-128), false);
+    CU_ASSERT_EQUAL(validerTH_2(127), false);
     CU_ASSERT_EQUAL(validerTH_2(0), true);
 
 }
