@@ -1,19 +1,19 @@
-# Fichiers C
-*.o
-*.out
-tp1
-tcv.h
-# Fichiers Vim
-*.swo
-*.swp
 
-# Fichiers temporaires
-*.old
-*.tmp
 *.bak
-
-# Exemple de répertoire à ignorer
 bin/
 build/
-.idea/
 data/
+# Exemple de répertoire à ignorer
+# Fichiers C
+# Fichiers temporaires
+# Fichiers Vim
+*.guy
+.idea/
+*.o
+*.old
+*.out
+*.swo
+*.swp
+tcv.h
+*.tmp
+tp1
