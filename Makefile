@@ -3,17 +3,37 @@ CUNIT_H = /usr/include/CUnit
 CUNIT_LIB = /usr/lib/x86_64-linux-gnu
 SOURCE = tcv
 
-tp1 : tp1.c lib
-	gcc $(CFLAGS) -I$(CUNIT_H) -L$(CUNIT_LIB)  -o tp1 tp1.c $(SOURCE).o -lcunit
+default : tp2
+
+tp2 : tp2.o malib.o malib.h #$(SOURCE).o $(SOURCE).h
+	gcc $(CFLAGS) -o tp2 tp2.o malib.o 
+	#$(SOURCE).o
+
+tp2.o : tp2.c malib.h
+	gcc $(CFLAGS) -c  tp2.c
+
+malib.o : malib.c malib.h #$(SOURCE).h
+	gcc $(CFLAGS) -c  malib.c
+
+#$(SOURCE).o : $(SOURCE).h
+	#lib
 
 lib :
 	mkdir -p 'data' && wget -P ./data/ https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip && unzip -o ./data/tp1.zip -d ./ && rm -rf data
+
+tp1 : tp1.c $(SOURCE).o
+	gcc $(CFLAGS) -I$(CUNIT_H) -L$(CUNIT_LIB)  -o tp1 tp1.c $(SOURCE).o -lcunit
+
+
 
 test-tp1a : tp1
 	./tp1 
 
 test-tp1b : tp1
 	./tp1 | ./liste.sh
+
+test-tp2 : tp2
+	./tp2
 
 .PHONY: clean
 

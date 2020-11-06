@@ -11,7 +11,7 @@ void traiterEntree(char* ligne){
     char resteLigne[TAILLE];
     int resultat;
 
-    resultat = sscanf(ligne, "%d %c%c %s", &timestamp, &zero, &noTrans, resteLigne);
+    resultat = sscanf(ligne, "%zu %c%c %s", &timestamp, &zero, &noTrans, resteLigne);
     if(resultat == 4 && zero == '0' && noTrans >= '0' && noTrans <= '5'){
         switch (noTrans){
         case '0':
@@ -38,35 +38,35 @@ void traiterEntree(char* ligne){
             traiterEchangeDonnees(resteLigne);  
         }
     } else {
-        printf("erreur ligne");
+        printf("erreur ligne\n");
     }
 
 }
 
 void traiterIdentification(char* ligne){
-    printf("trt identification");
+    printf("trt identification\n");
 }
 
 void traiterTempHumaine(char* ligne){
-    printf("trt temperature humaine");
+    printf("trt temperature humaine\n");
 }
 
 void traiterTempAmbiante(char* ligne){
-    printf("trt temperature ambiante");
+    printf("trt temperature ambiante\n");
 }
 
 void traiterPulsation(char* ligne){
-    printf("trt pulsation");
+    printf("trt pulsation\n");
 }
 
 void traiterSignal(char* ligne){
-    printf("trt signal");
+    printf("trt signal\n");
 }
 
 void traiterEchangeDonnees(char* ligne){
-    printf("trt echange donnees");
+    printf("trt echange donnees\n");
 }
 
 void finProgramme(){
-    printf("fin du programmme");
+    printf("fin du programmme\n");
 }
