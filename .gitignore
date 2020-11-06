@@ -1,7 +1,9 @@
 # Fichiers C
 *.o
 *.out
+*.txt
 tp1
+tp2
 tcv.h
 # Fichiers Vim
 *.swo
