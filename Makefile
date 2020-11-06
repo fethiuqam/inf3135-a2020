@@ -13,7 +13,7 @@ test-tp1a : tp1
 	./tp1 
 
 test-tp1b : tp1
-	./tp1 | liste.sh
+	./tp1 | ./liste.sh
 
 .PHONY: clean
 
