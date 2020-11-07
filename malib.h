@@ -8,6 +8,7 @@
 #define DEFAUT_ID 9999
 #define DEFAUT_PUISSANCE 2
 #define CAPACITY 2
+#define CONST_M -69
 
 typedef struct beacon_s {
     size_t id;
@@ -32,7 +33,7 @@ void traiterTempAmbiante(char* ligne, Beacon* beacon);
 
 void traiterPulsation(char* ligne, Beacon* beacon);
 
-void traiterSignal(char* ligne);
+void traiterSignal(char* ligne, Beacon* beacon );
 
 void traiterEchangeDonnees(char* ligne, Beacon* beacon);
 

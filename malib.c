@@ -2,6 +2,7 @@
 #include "tcv.h"
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 void erreurligne(){
     printf("erreur ligne\n");
@@ -35,7 +36,7 @@ void traiterEntree(char* ligne , Beacon* beacon){
             break;
 
         case '4':
-            traiterSignal(ligne);
+            traiterSignal(ligne, beacon);
             break;
 
         case '5':
@@ -127,8 +128,20 @@ void traiterPulsation(char* ligne, Beacon* beacon){
     }
 }
 
-void traiterSignal(char* ligne){
-    printf("trt signal\n");
+void traiterSignal(char* ligne, Beacon* beacon){
+    size_t timestamp;
+    size_t id;
+    short signal;
+    char vide[2];
+    char num[3];
+    if(sscanf(ligne, "%zu %s %hd %zu%s", &timestamp, num, &signal, &id , vide) == 4){
+        if(validerSignal_2((char)signal)){
+            float distance = powf (10.0 ,(CONST_M - signal)/(10.0 * beacon->puissance));
+            printf("14 %zu %zu %.1f\n", timestamp, id, distance);
+        } else 
+            printf("erreur signal");  
+    } else 
+        erreurligne();
 }
 
 void traiterEchangeDonnees(char* ligne, Beacon* beacon){
