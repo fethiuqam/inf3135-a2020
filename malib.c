@@ -1,4 +1,5 @@
 #include "malib.h"
+#include "tcv.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -22,15 +23,15 @@ void traiterEntree(char* ligne , Beacon* beacon){
             break;
 
         case '1':
-            traiterTempHumaine(ligne, beacon);
+            traiterTempHumaine(resteLigne, beacon);
             break;
 
         case '2':
-            traiterTempAmbiante(ligne, beacon);
+            traiterTempAmbiante(resteLigne, beacon);
             break;
 
         case '3':
-            traiterPulsation(ligne, beacon);
+            traiterPulsation(resteLigne, beacon);
             break;
 
         case '4':
@@ -58,11 +59,28 @@ void traiterIdentification(char* ligne, Beacon* beacon){
         printf("10 %zu %zu %u\n", timestamp, id, puissance);
     } else 
         erreurligne();
-    
 }
 
 void traiterTempHumaine(char* ligne, Beacon* beacon){
-    printf("trt temperature humaine\n");
+    if(strncmp(ligne , "ERREUR" , TAILLE) == 0){
+        if(beacon->comptErreur[0] == 2){
+            beacon->comptErreur[0] = 0 ;
+            beacon->cumulErreur[0]++ ;
+        } else
+            beacon->comptErreur[0]++ ;
+        
+    } else {
+        float mesure;
+        char vide[2];
+        if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
+            int temperature = (int)(mesure * 10);
+            if(validerTH_1(temperature))
+                appendV(&beacon->tempHumaines, mesure);
+            else
+                beacon->comptInvalide[0]++;
+        } else
+            erreurligne();
+    }
 }
 
 void traiterTempAmbiante(char* ligne, Beacon* beacon){
@@ -82,6 +100,11 @@ void traiterEchangeDonnees(char* ligne, Beacon* beacon){
 }
 
 void finProgramme(Beacon* beacon){
-    printf("fin du programmme\n");
+    printf("---------\nresumé\n\n");
+    printf("err TH : %zu\n", beacon->cumulErreur[0]);
+    printf("invalid TH : %zu\n", beacon->comptInvalide[0]);
+    for (int i = 0; i < beacon->tempHumaines.size; i++)
+        printf("Th %d : %f , ", i,getV(&beacon->tempHumaines, i) );
+    
 }
 
