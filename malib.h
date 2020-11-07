@@ -1,20 +1,40 @@
 #ifndef MALIB_H
 #define MALIB_H
 
-void traiterEntree(char* ligne);
+#include "vector.h"
 
-void traiterIdentification(char* ligne);
+#define TAILLE 100
+#define DEFAUT_ID 9999
+#define DEFAUT_PUISSANCE 2
+#define CAPACITY 2
 
-void traiterTempHumaine(char* ligne);
+typedef struct beacon_s {
+    size_t id;
+    unsigned char puissance;
+    Vector tempHumaines;
+    Vector tempAmbiantes;
+    Vector pulsations;
+    Vector premierNiveau;
+    size_t comptInvalide[3];
+    unsigned char comptErreur[3];
+    size_t cumulErreur[3];
+} Beacon;
 
-void traiterTempAmbiante(char* ligne);
 
-void traiterPulsation(char* ligne);
+void traiterEntree(char* ligne , Beacon* beacon);
+
+void traiterIdentification(char* ligne, Beacon* beacon);
+
+void traiterTempHumaine(char* ligne, Beacon* beacon);
+
+void traiterTempAmbiante(char* ligne, Beacon* beacon);
+
+void traiterPulsation(char* ligne, Beacon* beacon);
 
 void traiterSignal(char* ligne);
 
-void traiterEchangeDonnees(char* ligne);
+void traiterEchangeDonnees(char* ligne, Beacon* beacon);
 
-void finProgramme();
+void finProgramme(Beacon* beacon);
 
 #endif

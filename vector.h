@@ -1,6 +1,9 @@
 // vector.c ** exemple pedagogique MIT license GF 2019 **
 // Un TAD type de donnees abstrait en C
 // Ne pas utiliser ceci (tel quel) en production.
+#ifndef VECTOR_H
+#define VECTOR_H
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -66,6 +69,8 @@ void extendV(Vector *vector) {
 void freeV(Vector *vector) {
   free(vector->data);
 }
+
+#endif
 
 // int main() {
 //   // declare and initialize a new vector

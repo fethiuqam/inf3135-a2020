@@ -1,9 +1,8 @@
 #include "malib.h"
 #include <stdio.h>
+#include <string.h>
 
-#define TAILLE 100
-
-void traiterEntree(char* ligne){
+void traiterEntree(char* ligne , Beacon* beacon){
 
     char zero;
     char noTrans;
@@ -43,19 +42,19 @@ void traiterEntree(char* ligne){
 
 }
 
-void traiterIdentification(char* ligne){
+void traiterIdentification(char* ligne, Beacon* beacon){
     printf("trt identification\n");
 }
 
-void traiterTempHumaine(char* ligne){
-    printf("trt temperature humaine\n");
+void traiterTempHumaine(char* ligne, Beacon* beacon){
+    if()
 }
 
-void traiterTempAmbiante(char* ligne){
+void traiterTempAmbiante(char* ligne, Beacon* beacon){
     printf("trt temperature ambiante\n");
 }
 
-void traiterPulsation(char* ligne){
+void traiterPulsation(char* ligne, Beacon* beacon){
     printf("trt pulsation\n");
 }
 
@@ -63,10 +62,10 @@ void traiterSignal(char* ligne){
     printf("trt signal\n");
 }
 
-void traiterEchangeDonnees(char* ligne){
+void traiterEchangeDonnees(char* ligne, Beacon* beacon){
     printf("trt echange donnees\n");
 }
 
-void finProgramme(){
+void finProgramme(Beacon* beacon){
     printf("fin du programmme\n");
 }
