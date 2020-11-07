@@ -84,11 +84,47 @@ void traiterTempHumaine(char* ligne, Beacon* beacon){
 }
 
 void traiterTempAmbiante(char* ligne, Beacon* beacon){
-    printf("trt temperature ambiante\n");
+    if(strncmp(ligne , "ERREUR" , TAILLE) == 0){
+        if(beacon->comptErreur[1] == 2){
+            beacon->comptErreur[1] = 0 ;
+            beacon->cumulErreur[1]++ ;
+        } else
+            beacon->comptErreur[1]++ ;
+        
+    } else {
+        float mesure;
+        char vide[2];
+        if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
+            short temperature = (short)(mesure * 10);
+            if(validerTA_3(temperature))
+                appendV(&beacon->tempAmbiantes, mesure);
+            else
+                beacon->comptInvalide[1]++;
+        } else
+            erreurligne();
+    }
 }
 
 void traiterPulsation(char* ligne, Beacon* beacon){
-    printf("trt pulsation\n");
+    if(strncmp(ligne , "ERREUR" , TAILLE) == 0){
+        if(beacon->comptErreur[2] == 2){
+            beacon->comptErreur[2] = 0 ;
+            beacon->cumulErreur[2]++ ;
+        } else
+            beacon->comptErreur[2]++ ;
+        
+    } else {
+        float mesure;
+        char vide[2];
+        if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
+            short pulsation = (short)mesure;
+            if(validerPulsation_3(pulsation))
+                appendV(&beacon->pulsations, mesure);
+            else
+                beacon->comptInvalide[2]++;
+        } else
+            erreurligne();
+    }
 }
 
 void traiterSignal(char* ligne){
