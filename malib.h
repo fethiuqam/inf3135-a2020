@@ -2,6 +2,7 @@
 #define MALIB_H
 
 #include "vector.h"
+#include <stdio.h>
 
 #define TAILLE 100
 #define DEFAUT_ID 9999

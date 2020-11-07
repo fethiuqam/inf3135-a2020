@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 
+void erreurligne(){
+    printf("erreur ligne\n");
+}
+
 void traiterEntree(char* ligne , Beacon* beacon){
 
     char zero;
@@ -14,40 +18,51 @@ void traiterEntree(char* ligne , Beacon* beacon){
     if(resultat == 4 && zero == '0' && noTrans >= '0' && noTrans <= '5'){
         switch (noTrans){
         case '0':
-            traiterIdentification(resteLigne);
+            traiterIdentification(ligne, beacon);
             break;
 
         case '1':
-            traiterTempHumaine(resteLigne);
+            traiterTempHumaine(ligne, beacon);
             break;
 
         case '2':
-            traiterTempAmbiante(resteLigne);
+            traiterTempAmbiante(ligne, beacon);
             break;
 
         case '3':
-            traiterPulsation(resteLigne);
+            traiterPulsation(ligne, beacon);
             break;
 
         case '4':
-            traiterSignal(resteLigne);
+            traiterSignal(ligne);
             break;
 
         case '5':
-            traiterEchangeDonnees(resteLigne);  
+            traiterEchangeDonnees(ligne, beacon);  
         }
-    } else {
-        printf("erreur ligne\n");
-    }
-
+    } else 
+        erreurligne();
 }
 
 void traiterIdentification(char* ligne, Beacon* beacon){
-    printf("trt identification\n");
+    size_t timestamp;
+    size_t id;
+    unsigned char puissance;
+    char vide[2];
+    char num[3];
+    if(sscanf(ligne, "%zu %s %zu %hhu%s", &timestamp, num, &id ,&puissance, vide) == 4){
+        if(puissance < 2 || puissance > 4)
+            printf("erreur puissance");
+        beacon->id = id;
+        beacon->puissance = puissance;
+        printf("10 %zu %zu %u\n", timestamp, id, puissance);
+    } else 
+        erreurligne();
+    
 }
 
 void traiterTempHumaine(char* ligne, Beacon* beacon){
-    if()
+    printf("trt temperature humaine\n");
 }
 
 void traiterTempAmbiante(char* ligne, Beacon* beacon){
@@ -69,3 +84,4 @@ void traiterEchangeDonnees(char* ligne, Beacon* beacon){
 void finProgramme(Beacon* beacon){
     printf("fin du programmme\n");
 }
+

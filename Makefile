@@ -5,15 +5,18 @@ SOURCE = tcv
 
 default : tp2
 
-tp2 : tp2.o malib.o malib.h #$(SOURCE).o $(SOURCE).h
-	gcc $(CFLAGS) -o tp2 tp2.o malib.o 
+tp2 : tp2.o malib.o malib.h vector.o vector.h #$(SOURCE).o $(SOURCE).h
+	gcc $(CFLAGS) -o tp2 tp2.o malib.o vector.o
 	#$(SOURCE).o
 
-tp2.o : tp2.c malib.h
+tp2.o : tp2.c malib.h vector.h
 	gcc $(CFLAGS) -c  tp2.c
 
-malib.o : malib.c malib.h #$(SOURCE).h
+malib.o : malib.c malib.h vector.h #$(SOURCE).h
 	gcc $(CFLAGS) -c  malib.c
+
+vector.o : vector.c vector.h  #$(SOURCE).h
+	gcc $(CFLAGS) -c  vector.c
 
 #$(SOURCE).o : $(SOURCE).h
 	#lib
