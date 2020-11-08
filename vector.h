@@ -4,20 +4,23 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <stdio.h>
+#include <stdbool.h>
 
 typedef struct {
   int size;      // slots used so far
   int capacity;  // total available slots
-  float *data;     // array of integers we're storing
+  size_t *data;     // array of integers we're storing
 } Vector;
 
 void initV(Vector *vector, int capacity);
-void appendV(Vector *vector, float value);
-float getV(Vector *vector, int index);
-void setV(Vector *vector, int index, float value);
+void appendV(Vector *vector, size_t value);
+size_t getV(Vector *vector, int index);
+void setV(Vector *vector, int index, size_t value);
 void extendV(Vector *vector);
 void freeV(Vector *vector);
 
+bool containV(Vector *vector, size_t value);
 
 
 #endif

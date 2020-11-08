@@ -8,6 +8,8 @@ void erreurligne(){
     printf("erreur ligne\n");
 }
 
+
+
 void traiterEntree(char* ligne , Beacon* beacon){
 
     char zero;
@@ -76,7 +78,7 @@ void traiterTempHumaine(char* ligne, Beacon* beacon){
         if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
             int temperature = (int)(mesure * 10);
             if(validerTH_1(temperature))
-                appendV(&beacon->tempHumaines, mesure);
+                appendV(&beacon->tempHumaines, (size_t)(mesure*10));
             else
                 beacon->comptInvalide[0]++;
         } else
@@ -98,7 +100,7 @@ void traiterTempAmbiante(char* ligne, Beacon* beacon){
         if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
             short temperature = (short)(mesure * 10);
             if(validerTA_3(temperature))
-                appendV(&beacon->tempAmbiantes, mesure);
+                appendV(&beacon->tempAmbiantes, (size_t)(mesure*10 + 1000));
             else
                 beacon->comptInvalide[1]++;
         } else
@@ -120,7 +122,7 @@ void traiterPulsation(char* ligne, Beacon* beacon){
         if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
             short pulsation = (short)mesure;
             if(validerPulsation_3(pulsation))
-                appendV(&beacon->pulsations, mesure);
+                appendV(&beacon->pulsations, (size_t)mesure);
             else
                 beacon->comptInvalide[2]++;
         } else
@@ -136,6 +138,7 @@ void traiterSignal(char* ligne, Beacon* beacon){
     char num[3];
     if(sscanf(ligne, "%zu %s %hd %zu%s", &timestamp, num, &signal, &id , vide) == 4){
         if(validerSignal_2((char)signal)){
+            appendV(&beacon->premierNiveau, id);
             float distance = powf (10.0 ,(CONST_M - signal)/(10.0 * beacon->puissance));
             printf("14 %zu %zu %.1f\n", timestamp, id, distance);
         } else 
@@ -145,15 +148,27 @@ void traiterSignal(char* ligne, Beacon* beacon){
 }
 
 void traiterEchangeDonnees(char* ligne, Beacon* beacon){
-    printf("trt echange donnees\n");
+    size_t timestamp;
+    size_t id;
+    char vide[100];
+    char num[3];
+    if(sscanf(ligne, "%zu %s %zu %s", &timestamp, num, &id , vide) >= 3){ //strtok
+        if(!containV(&beacon->premierNiveau, id))
+            appendV(&beacon->premierNiveau, id);
+        printf("15 %zu %zu", timestamp, beacon->id);
+        for (int i = 0; i < beacon->premierNiveau.size ; i++)
+            printf(" %zu", beacon->premierNiveau.data[i]);
+        printf("\n");
+    } else 
+        erreurligne();
 }
 
 void finProgramme(Beacon* beacon){
     printf("---------\nresumé\n\n");
     printf("err TH : %zu\n", beacon->cumulErreur[0]);
     printf("invalid TH : %zu\n", beacon->comptInvalide[0]);
-    for (int i = 0; i < beacon->tempHumaines.size; i++)
-        printf("Th %d : %f , ", i,getV(&beacon->tempHumaines, i) );
+    // for (int i = 0; i < beacon->tempHumaines.size; i++)
+    //     printf("Th %d : %f , ", i,getV(&beacon->tempHumaines, i) );
     
 }
 
