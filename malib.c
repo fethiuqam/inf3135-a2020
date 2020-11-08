@@ -1,8 +1,9 @@
 #include "malib.h"
-#include "tcv.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 void erreurligne(){
     printf("erreur ligne\n");
@@ -100,7 +101,7 @@ void traiterTempAmbiante(char* ligne, Beacon* beacon){
         if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
             short temperature = (short)(mesure * 10);
             if(validerTA_3(temperature))
-                appendV(&beacon->tempAmbiantes, (size_t)(mesure*10 + 1000));
+                appendV(&beacon->tempAmbiantes, (size_t)(mesure * 10 + 1000));
             else
                 beacon->comptInvalide[1]++;
         } else
@@ -163,12 +164,47 @@ void traiterEchangeDonnees(char* ligne, Beacon* beacon){
         erreurligne();
 }
 
+void afficherMoyennes(Beacon* beacon){
+    float tempHumaine = 0;
+    float tempAmbiante = 0;
+    size_t pulsation = 0;
+
+    for (int i = 0; i < beacon->tempHumaines.size; i++)
+        tempHumaine += (float) beacon->tempHumaines.data[i] / 10;
+    tempHumaine /= beacon->tempHumaines.size;
+
+    for (int i = 0; i < beacon->tempAmbiantes.size; i++)
+        tempAmbiante += (float)((int)beacon->tempAmbiantes.data[i] - 1000)/10;
+    tempAmbiante /= beacon->tempAmbiantes.size;
+
+    for (int i = 0; i < beacon->pulsations.size; i++)
+        pulsation += beacon->pulsations.data[i] ;
+    pulsation /= beacon->pulsations.size;
+
+    printf("21 %.1f %.1f %zu\n", tempHumaine, tempAmbiante, pulsation);
+}
+
+void afficherErreursInvalides(Beacon* beacon){
+
+    printf("22 %zu %zu %zu\n", beacon->comptInvalide[0], beacon->comptInvalide[1], beacon->comptInvalide[2]);
+}
+
+void afficherErreursCumulees(Beacon* beacon){
+
+    printf("23 %zu %zu %zu\n", beacon->cumulErreur[0], beacon->cumulErreur[1], beacon->cumulErreur[2]);
+}
+
 void finProgramme(Beacon* beacon){
-    printf("---------\nresumé\n\n");
-    printf("err TH : %zu\n", beacon->cumulErreur[0]);
-    printf("invalid TH : %zu\n", beacon->comptInvalide[0]);
-    // for (int i = 0; i < beacon->tempHumaines.size; i++)
-    //     printf("Th %d : %f , ", i,getV(&beacon->tempHumaines, i) );
+    afficherMoyennes(beacon);
+    afficherErreursInvalides (beacon);
+    afficherErreursCumulees (beacon);
     
+}
+
+void afficherVersion(){
+    version_t* version = (version_t*)malloc(sizeof(version_t));
+    getVersion(version);
+    printf("version #: %hhu.%hhu.%u\n", version->major, version->minor, version->build);
+    free(version);
 }
 

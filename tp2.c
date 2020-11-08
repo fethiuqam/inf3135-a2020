@@ -20,11 +20,18 @@ int main (int argc , char* argv[] ){
         beacon.cumulErreur[i] = 0 ;
     }
     
+    afficherVersion();
+
     while (fgets(ligne,  TAILLE , stdin) != NULL){
         traiterEntree(ligne , &beacon);
     }
 
     finProgramme(&beacon);
+
+    freeV(&beacon.tempHumaines);
+    freeV(&beacon.tempAmbiantes);
+    freeV(&beacon.pulsations);
+    freeV(&beacon.premierNiveau);
 
     return 0;
 }

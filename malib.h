@@ -2,6 +2,7 @@
 #define MALIB_H
 
 #include "vector.h"
+#include "tcv.h"
 #include <stdio.h>
 
 #define TAILLE 100
@@ -38,5 +39,7 @@ void traiterSignal(char* ligne, Beacon* beacon );
 void traiterEchangeDonnees(char* ligne, Beacon* beacon);
 
 void finProgramme(Beacon* beacon);
+
+void afficherVersion();
 
 #endif
