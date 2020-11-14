@@ -24,6 +24,7 @@ void test_validerTH_1(void) {
 // la fonction validerTH_2 n'est pas fiable meme si elle passe le test
 // elle retourne toujours false car elle ne pourra pas valider une temperature superieur a 12.7
 void test_validerTH_2(void) {
+    CU_ASSERT_EQUAL(true, false);
     for (int i = -128; i < 127; ++i) {
         CU_ASSERT_EQUAL(validerTH_2(i), false);
     }
@@ -53,6 +54,7 @@ void test_validerTA_1(void) {
 // la fonction validerTA_2 n'est pas fiable meme si elle passe le test
 // elle retourne toujours true car elle ne pourra pas valider une temperature inferieure a -40 ou superieure a 40
 void test_validerTA_2(void) {
+    CU_ASSERT_EQUAL(true, false);
     for (int i = -128; i < 127; ++i) {
         CU_ASSERT_EQUAL(validerTA_2(i), true);
     }
@@ -81,6 +83,7 @@ void test_validerPulsation_1(void) {
 // la fonction validerPulsation_2 n'est pas fiable meme si elle passe le test
 // elle ne pourra pas valider une pulsation superieur a 127
 void test_validerPulsation_2(void) {
+    CU_ASSERT_EQUAL(true, false);
     for (int i = -128; i < 127; ++i) {
         if (i < 50) {
             CU_ASSERT_EQUAL(validerPulsation_2(i), false);
