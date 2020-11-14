@@ -12,6 +12,7 @@
 #define CONST_M -69
 
 typedef struct beacon_s {
+    size_t timestamp;
     size_t id;
     unsigned char puissance;
     Vector tempHumaines;
@@ -34,6 +35,8 @@ void traiterTempAmbiante(char* ligne, Beacon* beacon);
 
 void traiterPulsation(char* ligne, Beacon* beacon);
 
+void traiterErreur(Beacon* beacon , int index);
+
 void traiterSignal(char* ligne, Beacon* beacon );
 
 void traiterEchangeDonnees(char* ligne, Beacon* beacon);
@@ -41,5 +44,6 @@ void traiterEchangeDonnees(char* ligne, Beacon* beacon);
 void finProgramme(Beacon* beacon);
 
 void afficherVersion();
+
 
 #endif

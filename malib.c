@@ -5,9 +5,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-void erreurligne(){
-    printf("erreur ligne\n");
-}
+void erreurligne(){}
 
 
 
@@ -20,7 +18,8 @@ void traiterEntree(char* ligne , Beacon* beacon){
     int resultat;
 
     resultat = sscanf(ligne, "%zu %c%c %s", &timestamp, &zero, &noTrans, resteLigne);
-    if(resultat == 4 && zero == '0' && noTrans >= '0' && noTrans <= '5'){
+    if(resultat == 4 && zero == '0' && noTrans >= '0' && noTrans <= '5' && timestamp >= beacon->timestamp){
+        beacon->timestamp = timestamp;
         switch (noTrans){
         case '0':
             traiterIdentification(ligne, beacon);
@@ -66,14 +65,9 @@ void traiterIdentification(char* ligne, Beacon* beacon){
 }
 
 void traiterTempHumaine(char* ligne, Beacon* beacon){
-    if(strncmp(ligne , "ERREUR" , TAILLE) == 0){
-        if(beacon->comptErreur[0] == 2){
-            beacon->comptErreur[0] = 0 ;
-            beacon->cumulErreur[0]++ ;
-        } else
-            beacon->comptErreur[0]++ ;
-        
-    } else {
+    if(strncmp(ligne , "ERREUR" , TAILLE) == 0)
+        traiterErreur(beacon, 0);
+    else {
         float mesure;
         char vide[2];
         if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
@@ -88,14 +82,9 @@ void traiterTempHumaine(char* ligne, Beacon* beacon){
 }
 
 void traiterTempAmbiante(char* ligne, Beacon* beacon){
-    if(strncmp(ligne , "ERREUR" , TAILLE) == 0){
-        if(beacon->comptErreur[1] == 2){
-            beacon->comptErreur[1] = 0 ;
-            beacon->cumulErreur[1]++ ;
-        } else
-            beacon->comptErreur[1]++ ;
-        
-    } else {
+    if(strncmp(ligne , "ERREUR" , TAILLE) == 0)
+        traiterErreur(beacon, 1);  
+    else {
         float mesure;
         char vide[2];
         if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
@@ -110,14 +99,9 @@ void traiterTempAmbiante(char* ligne, Beacon* beacon){
 }
 
 void traiterPulsation(char* ligne, Beacon* beacon){
-    if(strncmp(ligne , "ERREUR" , TAILLE) == 0){
-        if(beacon->comptErreur[2] == 2){
-            beacon->comptErreur[2] = 0 ;
-            beacon->cumulErreur[2]++ ;
-        } else
-            beacon->comptErreur[2]++ ;
-        
-    } else {
+    if(strncmp(ligne , "ERREUR" , TAILLE) == 0)
+        traiterErreur(beacon, 2); 
+    else {
         float mesure;
         char vide[2];
         if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
@@ -129,6 +113,14 @@ void traiterPulsation(char* ligne, Beacon* beacon){
         } else
             erreurligne();
     }
+}
+
+void traiterErreur(Beacon* beacon , int index){
+    if(beacon->comptErreur[index] == 2){
+            beacon->comptErreur[index] = 0 ;
+            beacon->cumulErreur[index]++ ;
+        } else
+            beacon->comptErreur[index]++ ;
 }
 
 void traiterSignal(char* ligne, Beacon* beacon){
@@ -171,15 +163,18 @@ void afficherMoyennes(Beacon* beacon){
 
     for (int i = 0; i < beacon->tempHumaines.size; i++)
         tempHumaine += (float) beacon->tempHumaines.data[i] / 10;
-    tempHumaine /= beacon->tempHumaines.size;
+    if(beacon->tempHumaines.size > 0)
+        tempHumaine /= beacon->tempHumaines.size;
 
     for (int i = 0; i < beacon->tempAmbiantes.size; i++)
         tempAmbiante += (float)((int)beacon->tempAmbiantes.data[i] - 1000)/10;
-    tempAmbiante /= beacon->tempAmbiantes.size;
+    if(beacon->tempAmbiantes.size > 0)
+        tempAmbiante /= beacon->tempAmbiantes.size;
 
     for (int i = 0; i < beacon->pulsations.size; i++)
         pulsation += beacon->pulsations.data[i] ;
-    pulsation /= beacon->pulsations.size;
+    if(beacon->pulsations.size > 0)
+        pulsation /= beacon->pulsations.size;
 
     printf("21 %.1f %.1f %zu\n", tempHumaine, tempAmbiante, pulsation);
 }

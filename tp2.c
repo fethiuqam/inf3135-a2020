@@ -8,6 +8,7 @@ int main (int argc , char* argv[] ){
     char ligne[TAILLE];
     // initialisation de l'objet beacon 
     Beacon beacon;
+    beacon.timestamp = 0;
     beacon.id = DEFAUT_ID;
     beacon.puissance = DEFAUT_PUISSANCE;
     initV(&beacon.tempHumaines, CAPACITY);
