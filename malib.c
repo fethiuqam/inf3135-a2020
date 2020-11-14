@@ -76,8 +76,7 @@ void traiterTempHumaine(char* ligne, Beacon* beacon){
                 appendV(&beacon->tempHumaines, (size_t)(mesure*10));
             else
                 beacon->comptInvalide[0]++;
-        } else
-            erreurligne();
+        }
     }
 }
 
@@ -88,13 +87,21 @@ void traiterTempAmbiante(char* ligne, Beacon* beacon){
         float mesure;
         char vide[2];
         if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
-            short temperature = (short)(mesure * 10);
-            if(validerTA_3(temperature))
-                appendV(&beacon->tempAmbiantes, (size_t)(mesure * 10 + 1000));
-            else
-                beacon->comptInvalide[1]++;
-        } else
-            erreurligne();
+            unsigned int version = getBuildVersion();
+            if(version <= VERSION){
+                short temperature = (short)(mesure * 10);
+                if(validerTA_3(temperature))
+                    appendV(&beacon->tempAmbiantes, (size_t)(mesure * 10 + 1000));
+                else
+                    beacon->comptInvalide[1]++;
+            }else {
+                int temperature = (int)(mesure * 10);
+                if(validerTA_1(temperature))
+                    appendV(&beacon->tempAmbiantes, (size_t)(mesure * 10 + 1000));
+                else
+                    beacon->comptInvalide[1]++;
+            }
+        }
     }
 }
 
@@ -105,13 +112,21 @@ void traiterPulsation(char* ligne, Beacon* beacon){
         float mesure;
         char vide[2];
         if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
-            short pulsation = (short)mesure;
-            if(validerPulsation_3(pulsation))
-                appendV(&beacon->pulsations, (size_t)mesure);
-            else
-                beacon->comptInvalide[2]++;
-        } else
-            erreurligne();
+            unsigned int version = getBuildVersion();
+            if(version <= VERSION){
+                short pulsation = (short)mesure;
+                if(validerPulsation_3(pulsation))
+                    appendV(&beacon->pulsations, (size_t)mesure);
+                else
+                    beacon->comptInvalide[2]++;
+            }else {
+                int pulsation = (int)mesure;
+                if(validerPulsation_1(pulsation))
+                    appendV(&beacon->pulsations, (size_t)mesure);
+                else
+                    beacon->comptInvalide[2]++;
+            }
+        }
     }
 }
 
@@ -130,12 +145,21 @@ void traiterSignal(char* ligne, Beacon* beacon){
     char vide[2];
     char num[3];
     if(sscanf(ligne, "%zu %s %hd %zu%s", &timestamp, num, &signal, &id , vide) == 4){
-        if(validerSignal_2((char)signal)){
-            appendV(&beacon->premierNiveau, id);
-            float distance = powf (10.0 ,(CONST_M - signal)/(10.0 * beacon->puissance));
-            printf("14 %zu %zu %.1f\n", timestamp, id, distance);
-        } else 
-            printf("erreur signal");  
+        unsigned int version = getBuildVersion();
+            if(version <= VERSION){
+                if(signal >= -128 && signal <= 127 && validerSignal_2((char)signal)){
+                    appendV(&beacon->premierNiveau, id);
+                    float distance = powf (10.0 ,(CONST_M - signal)/(10.0 * beacon->puissance));
+                    printf("14 %zu %zu %.1f\n", timestamp, id, distance);
+                }
+            }else {
+                if(validerSignal_3(signal)){
+                    appendV(&beacon->premierNiveau, id);
+                    float distance = powf (10.0 ,(CONST_M - signal)/(10.0 * beacon->puissance));
+                    printf("14 %zu %zu %.1f\n", timestamp, id, distance);
+                }
+            }
+
     } else 
         erreurligne();
 }
@@ -196,10 +220,15 @@ void finProgramme(Beacon* beacon){
     
 }
 
-void afficherVersion(){
+void afficherVersion(void){
     version_t* version = (version_t*)malloc(sizeof(version_t));
     getVersion(version);
     printf("version #: %hhu.%hhu.%u\n", version->major, version->minor, version->build);
     free(version);
 }
 
+unsigned int getBuildVersion(void){
+    version_t* version = (version_t*)malloc(sizeof(version_t));
+    getVersion(version);
+    return version->build;
+}

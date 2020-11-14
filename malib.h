@@ -10,6 +10,7 @@
 #define DEFAUT_PUISSANCE 2
 #define CAPACITY 2
 #define CONST_M -69
+#define VERSION 1003
 
 typedef struct beacon_s {
     size_t timestamp;
@@ -43,7 +44,8 @@ void traiterEchangeDonnees(char* ligne, Beacon* beacon);
 
 void finProgramme(Beacon* beacon);
 
-void afficherVersion();
+void afficherVersion(void);
 
+unsigned int getBuildVersion(void);
 
 #endif
