@@ -1,7 +1,6 @@
 # Fichiers C
 *.o
 *.out
-*.txt
 tp1
 tp2
 tcv.h
@@ -14,7 +13,7 @@ tcv.h
 *.tmp
 *.bak
 
-# Exemple de répertoire à ignorer
+# répertoires
 bin/
 build/
 .idea/
