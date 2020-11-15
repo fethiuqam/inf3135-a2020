@@ -1,3 +1,5 @@
+## Processus de réflexion et démarche 
+
 Ce programme est une simulation d’un module beacon qui traite des transactions à partir de l’entrée standard et répond aussi par des transactions sur la sortie standard.
 
 De ce fait j’ai commencé à implémenter une struct nommée Beacon qui contient les informations nécessaires au traitement des transactions tel que l’id, timestamp courant, puissance, un tableau dynamique pour les températures  humaines, un tableau dynamique pour les températures  ambiantes, un tableau dynamique pour les pulsations,  un tableau dynamique pour les id des pastilles de premier niveau, un tableau pour comptabiliser les erreurs d’invalidité, un tableau de compteurs d’erreur et un tableau des erreurs cumulées.

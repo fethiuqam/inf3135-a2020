@@ -51,7 +51,7 @@
 
    la sortie correspondante à cette entrée est  : 
 
-    ~~~~
+   ~~~~
     version #: 0.1.10005
     10 0 1000 3
     14 17599 1929292 3.4
@@ -61,7 +61,6 @@
     22 0 0 0
     23 0 0 0
    ~~~~
-
 
    ## Contenu du projet
 
