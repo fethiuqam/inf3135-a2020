@@ -4,14 +4,7 @@
    
    Ce programme a été réalisé dans le cadre du cours Construction et maintenance de logiciels INF3135 , session Automne 2020 à l'université de l'UQAM
 
-   Le rôle du programme est de tester et afficher les noms des fonctions qui échouent et qui passent, pour affirmer sans doute qu’elles sont les fonctions utilisables (fiables).
-   
-   Le programme teste à l'aide de la librairie cUnit toutes variantes des fonctions suivantes :
-   
-   - Valider la température humaine : validerTH_X
-   - Valider la température ambiante : validerTA_X
-   - Valider la pulsation : validerPulsation_X
-   - Valider le Signal : validerSignal_X
+   Le programme consiste en une simulation de traitement de transactions reçues par un module beacon de plusieurs capteurs et d'autres modules voisins, et réagissant par l'émission de transactions à son tour.
 
    ## Auteur
 
@@ -19,91 +12,85 @@
 
    ## Fonctionnement
 
-   Pour exécuter le programme, il suffit de lancer la commande à la racine du projet :
+   Le programme doit lire à partir de l'entrée standard stdin une ou plusieurs lignes.
+   Chaque ligne consiste en une transaction que le programme doit traiter.
+   la transaction en entrée contient :
+   - un timestamp informant le temps de la transaction.
+   - un numero à deux chiffres de 00 à 05 qui détermine le type de transaction.
+   - une succession de valeurs qui diffère d'un type de transaction à un autre.
+
+   l'execution du programme peut se faire avec l'une des commandes suivantes : 
    
    ~~~~
-       make test
+      $ ./tp2
+
+      $ cat file.dat | ./tp2
+
+      $ ./script.sh | ./tp2
+
+      $ head -n 100 file.txt | ./tp2
+      ...
    ~~~~
    
-   Ce qui va telecharger les fichiers sources `tvc.h` et `tvc.o` qui sont nécessaires pour la compilation qui va suivre le téléchargement, puis l'exécution du programme tp1 qui va donner le résultat :
-   ~~~~
-   
-     CUnit - A unit testing framework for C - Version 2.1-3
-     http://cunit.sourceforge.net/
+   Après le traitement des transactions par le programme, ce dernier peut émettre d'autres transactions sur la sortie standard stdout qui contiennent :
+   - un numero à deux chiffre (10, 14, 15, 21, 22, 23) qui détermine le type de transaction.
+   - une succession de valeurs qui diffère d'un type de transaction à un autre. 
 
-
-Suite: max_test_suite
-  Test: test_validerTH_1 ...passed
-  Test: test_validerTH_2 ...passed
-  Test: test_validerTH_3 ...FAILED
-    1. tp1.c:35  - CU_ASSERT_EQUAL(validerTH_3(i),true)
-    2. tp1.c:35  - CU_ASSERT_EQUAL(validerTH_3(i),true)
-  Test: test_validerTA_1 ...FAILED
-    1. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
-    2. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
-    3. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
-    4. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
-    5. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
-    6. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
-    7. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
-    8. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
-    9. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
-    10. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
-    11. tp1.c:45  - CU_ASSERT_EQUAL(validerTA_1(i),true)
-    ...
-   ~~~~
-
-Pour filtrer les résultats des tests en affichant que les fonctions qui réussissent, on peut lancer la commande après compilation :
+   Un exemple d'une suite de transactions d'entrée : 
 
    ~~~~
-       ./tp1 | ./liste.sh
+    0 00 1000 3
+    2 01 38.2
+    2001 01 ERREUR
+    10020 02 -10.2
+    11112 03 157
+    17599 04 -85 1929292
+    19012 04 -35 1929298
+    19511 05 1929298 100123 100987
    ~~~~
 
-Ce qui va afficher comme résultat : 
+   la sortie correspondante à cette entrée est  : 
 
+    ~~~~
+    version #: 0.1.10005
+    10 0 1000 3
+    14 17599 1929292 3.4
+    14 19012 1929298 0.1
+    15 19511 1000 1929292 1929298
+    21 38.2 -10.2 157
+    22 0 0 0
+    23 0 0 0
    ~~~~
-       test_validerTH_1
-       test_validerTH_2
-       test_validerTA_2
-       test_validerTA_3
-       test_validerPulsation_3
-       test_validerSignal_2
-   ~~~~
+
 
    ## Contenu du projet
 
-   - Un fichier `tp1.c` contenant le code source des fonctions de test ainsi que la fonction main;
-   - Un fichier `Makefile` responsable de la compilation et du téléchargement des sources, et supportant les appels `make`, `make clean`, `make lib` et `make test`;
+   - Un fichier `tp2.c` qui contient la fonction main.
+   - Les fichiers `malib.c` et `malib.h` qui contiennet toutes les fonctions et les structures utilisées dans le fichier `tp2.c`
+   - Les fichiers `vector.c` et `vector.h` qui contiennet la structure de tableau dynamique vue dans le cours et utilisée dans le fichier `malib.c` et `tp2.c`
+   - Un fichier `README.md` contenant la description et les informations importante du projet
+   - Un fichier `reflexion.md` qui démontre le processus de réflexion durant le travail; 
+   - Un fichier `Makefile` responsable de la compilation et du téléchargement des sources, et supportant les appels `make`, `make clean`, `make lib`, `make default`, `make tp1`, `make tp2`, `make test-tp1a`, `make test-tp1b`, `make test-tp2`;
    - Un fichier `cp.txt` contenant le code permanent de l'auteur du projet;
    - Un fichier `liste.sh` contenant le script qui filtre les fonctions qui réussissent les tests;
-   - Un fichier `README.md` contenant la description et les informations importante du projet
+   - Un fichier `tp1.c` contenant le code source du tp1;
    
+   ## Processus de réflexion
+
+   - [Description de la reflexion](reflexion.md) au cours de la construction du tp2. 
+
    ## Références
 
    - [CUnit Home](http://cunit.sourceforge.net/index.html)
    - [CUnit Framework](http://cunit.sourceforge.net/doxdocs/group__Framework.html)
-
+   - le fichier [vector.c](https://github.com/guyfrancoeur/INF3135_A2020/blob/master/code/vector.c) exemple pedagogique MIT license GF 2019, vu en cours dans le repertoire code.
 
    ## Statut
 
    Le projet est complété ne contenant aucun bug pour l'instant.
    
-   ## Réponse
    
-   #### Question 1
-   Pourquoi les valeurs décimales sont nocives pour l'ordinateur ?
-   
-   ##### Réponse
-   tous les nombres décimaux (c'est-à-dire écrits en base 10) ne sont pas forcément représentables de façon finie en binaire, et certains sont donc arrondis !
-   Par exemple 0,1 en base 10 s'écrit en binaire 0b0,00011001100… avec une infinité de 0011 ce qu peut mener à des résultatas de calcul inexacts.
-   
-   #### Question 2
-   Pourquoi faut-il respecter les limites des types de données ?
-   
-   ##### Réponse
-   Il faut respecter les limites des types de données car si on affecte une valeur qui dépasse la limite du type, le compilateur récupère les octets nécessaires pour ce type et assigne cette nouvelle valeur.
-   Par exemple, si on assigne la valeur 129 à un type char qui a une limite de 127, le compilateur lui affecte la valeur -127 et ne provoquera pas d'erreur, ce qui fausse le résultat du test.   
    
    ## Autoévaluation
    
-   Selon le barème, mon travail vaut 10.
+   Selon le barème, mon travail vaut 20.
