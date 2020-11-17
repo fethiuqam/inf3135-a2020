@@ -11,11 +11,10 @@ int main (int argc , char* argv[] ){
     beacon.timestamp = 0;
     beacon.id = DEFAUT_ID;
     beacon.puissance = DEFAUT_PUISSANCE;
-    initV(&beacon.tempHumaines, CAPACITY);
-    initV(&beacon.tempAmbiantes, CAPACITY);
-    initV(&beacon.pulsations, CAPACITY);
     initV(&beacon.premierNiveau, CAPACITY);
     for (int i = 0; i < 3; ++i){
+        beacon.valeurs[i] = 0.0;
+        beacon.comptValeurs[i] = 0;
         beacon.comptErreur[i] = 0 ;
         beacon.comptInvalide[i] = 0 ;
         beacon.cumulErreur[i] = 0 ;
@@ -28,10 +27,7 @@ int main (int argc , char* argv[] ){
     }
 
     finProgramme(&beacon);
-
-    freeV(&beacon.tempHumaines);
-    freeV(&beacon.tempAmbiantes);
-    freeV(&beacon.pulsations);
+    
     freeV(&beacon.premierNiveau);
 
     return 0;

@@ -72,8 +72,10 @@ void traiterTempHumaine(char* ligne, Beacon* beacon){
         char vide[2];
         if(sscanf(ligne, "%f%s", &mesure, vide) == 1){
             int temperature = (int)(mesure * 10);
-            if(validerTH_1(temperature))
-                appendV(&beacon->tempHumaines, (size_t)(mesure*10));
+            if(validerTH_1(temperature)){
+                beacon->valeurs[0] += mesure;
+                beacon->comptValeurs[0] ++ ;
+            }
             else
                 beacon->comptInvalide[0]++;
         }
@@ -90,14 +92,18 @@ void traiterTempAmbiante(char* ligne, Beacon* beacon){
             unsigned int version = getBuildVersion();
             if(version <= VERSION){
                 short temperature = (short)(mesure * 10);
-                if(validerTA_3(temperature))
-                    appendV(&beacon->tempAmbiantes, (size_t)(mesure * 10 + 1000));
+                if(validerTA_3(temperature)){
+                    beacon->valeurs[1] += mesure;
+                    beacon->comptValeurs[1] ++ ;
+                }
                 else
                     beacon->comptInvalide[1]++;
             }else {
                 int temperature = (int)(mesure * 10);
-                if(validerTA_1(temperature))
-                    appendV(&beacon->tempAmbiantes, (size_t)(mesure * 10 + 1000));
+                if(validerTA_1(temperature)){
+                    beacon->valeurs[1] += mesure;
+                    beacon->comptValeurs[1] ++ ;
+                }
                 else
                     beacon->comptInvalide[1]++;
             }
@@ -115,14 +121,18 @@ void traiterPulsation(char* ligne, Beacon* beacon){
             unsigned int version = getBuildVersion();
             if(version <= VERSION){
                 short pulsation = (short)mesure;
-                if(validerPulsation_3(pulsation))
-                    appendV(&beacon->pulsations, (size_t)mesure);
+                if(validerPulsation_3(pulsation)){
+                    beacon->valeurs[2] += mesure;
+                    beacon->comptValeurs[2] ++ ;
+                }
                 else
                     beacon->comptInvalide[2]++;
             }else {
                 int pulsation = (int)mesure;
-                if(validerPulsation_1(pulsation))
-                    appendV(&beacon->pulsations, (size_t)mesure);
+                if(validerPulsation_1(pulsation)){
+                    beacon->valeurs[2] += mesure;
+                    beacon->comptValeurs[2] ++ ;
+                }
                 else
                     beacon->comptInvalide[2]++;
             }
@@ -169,7 +179,7 @@ void traiterEchangeDonnees(char* ligne, Beacon* beacon){
     size_t id;
     char vide[100];
     char num[3];
-    if(sscanf(ligne, "%zu %s %zu %s", &timestamp, num, &id , vide) >= 3){ //strtok
+    if(sscanf(ligne, "%zu %s %zu %s", &timestamp, num, &id , vide) >= 3){ 
         if(!containV(&beacon->premierNiveau, id))
             appendV(&beacon->premierNiveau, id);
         printf("15 %zu %zu", timestamp, beacon->id);
@@ -181,26 +191,12 @@ void traiterEchangeDonnees(char* ligne, Beacon* beacon){
 }
 
 void afficherMoyennes(Beacon* beacon){
-    float tempHumaine = 0;
-    float tempAmbiante = 0;
-    size_t pulsation = 0;
-
-    for (int i = 0; i < beacon->tempHumaines.size; i++)
-        tempHumaine += (float) beacon->tempHumaines.data[i] / 10;
-    if(beacon->tempHumaines.size > 0)
-        tempHumaine /= beacon->tempHumaines.size;
-
-    for (int i = 0; i < beacon->tempAmbiantes.size; i++)
-        tempAmbiante += (float)((int)beacon->tempAmbiantes.data[i] - 1000)/10;
-    if(beacon->tempAmbiantes.size > 0)
-        tempAmbiante /= beacon->tempAmbiantes.size;
-
-    for (int i = 0; i < beacon->pulsations.size; i++)
-        pulsation += beacon->pulsations.data[i] ;
-    if(beacon->pulsations.size > 0)
-        pulsation /= beacon->pulsations.size;
-
-    printf("21 %.1f %.1f %zu\n", tempHumaine, tempAmbiante, pulsation);
+  
+    for (int i = 0; i < 3; i++){
+        if(beacon->comptValeurs[i] > 0)
+            beacon->valeurs[i] /= beacon->comptValeurs[i];
+    }
+    printf("21 %.1f %.1f %zu\n", beacon->valeurs[0], beacon->valeurs[1], (size_t)beacon->valeurs[2]);
 }
 
 void afficherErreursInvalides(Beacon* beacon){
