@@ -9,8 +9,5 @@ jobs:
     name: compilation tp2
     runs-on: ubuntu-latest
     timeout-minutes: 180
-    steps:
-    - uses: actions/checkout@tp2
-    - name: affichage
-      run: |
+    run: |
         make tp2
