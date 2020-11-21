@@ -1,0 +1,16 @@
+name: tp2
+on:
+  push:
+    branches:
+      - tp2
+
+jobs:
+  job_1:
+    name: compilation tp2
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+    - uses: actions/checkout@tp2
+    - name: affichage
+      run: |
+        make tp2
