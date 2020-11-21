@@ -11,4 +11,4 @@ jobs:
     timeout-minutes: 180
     steps:
     - name: compilation  
-      run: pwd
+      run: ls -al
