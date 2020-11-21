@@ -9,7 +9,7 @@ jobs:
     name: job 1
     runs-on: ubuntu-latest
     timeout-minutes: 180
-    uses: actions/checkout@v2
     steps:
+    - uses: actions/checkout@v2
     - name: compilation  
       run: make
