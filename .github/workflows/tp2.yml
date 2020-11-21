@@ -6,10 +6,9 @@ on:
 
 jobs:
   job_1:
-    name: compilation tp2
+    name: job 1
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
-    -name: compilation  
-      run: |
-        make
+    - name: compilation  
+      run: make
