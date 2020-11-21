@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
-      run: |
-        make tp2
+    -name: compilation  
+      run: make
