@@ -16,11 +16,11 @@ malib.o : malib.c malib.h tcv.h
 tcv.o : tcv.h
 
 tcv.h : lib
-	unzip -q -o ./data/tp1.zip -d ./
+	unzip -q -o ./data/tp2.zip -d ./
 
 lib :
-	mkdir -p data && wget -q -O ./data/tp1.zip https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip > /dev/null
-
+	mkdir -p data && wget -q -O ./data/tp2.zip https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp2.zip > /dev/null || wget -q -O ./data/tp2.zip https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip > /dev/null
+	
 tp1 : tp1.c tcv.o lib
 	gcc $(CFLAGS) -I$(CUNIT_H) -L$(CUNIT_LIB)  -o $@ $< tcv.o -lcunit
 
