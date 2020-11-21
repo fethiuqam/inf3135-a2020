@@ -11,4 +11,5 @@ jobs:
     timeout-minutes: 180
     steps:
     -name: compilation  
-      run: make
+      run: |
+        make
