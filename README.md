@@ -66,7 +66,6 @@
 
    - Un fichier `tp2.c` qui contient la fonction main.
    - Les fichiers `malib.c` et `malib.h` qui contiennet toutes les fonctions et les structures utilisées dans le fichier `tp2.c`
-   - Les fichiers `vector.c` et `vector.h` qui contiennet la structure de tableau dynamique vue dans le cours et utilisée dans le fichier `malib.c` et `tp2.c`
    - Un fichier `README.md` contenant la description et les informations importante du projet
    - Un fichier `reflexion.md` qui démontre le processus de réflexion durant le travail; 
    - Un fichier `Makefile` responsable de la compilation et du téléchargement des sources, et supportant les appels `make`, `make clean`, `make lib`, `make default`, `make tp1`, `make tp2`, `make test-tp1a`, `make test-tp1b`, `make test-tp2`;
