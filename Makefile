@@ -4,17 +4,14 @@ CUNIT_LIB = /usr/lib/x86_64-linux-gnu
 
 default : tp2
 
-tp2 : tp2.o malib.o malib.h vector.o vector.h tcv.o 
-	gcc $(CFLAGS) -o $@ $< malib.o vector.o tcv.o -lm
+tp2 : tp2.o malib.o malib.h tcv.o 
+	gcc $(CFLAGS) -o $@ $< malib.o tcv.o -lm
 
-tp2.o : tp2.c malib.h vector.h tcv.h
+tp2.o : tp2.c malib.h tcv.h
 	gcc $(CFLAGS) -c  $<
 
-malib.o : malib.c malib.h vector.h tcv.h
+malib.o : malib.c malib.h tcv.h
 	gcc $(CFLAGS) -c  $< 
-
-vector.o : vector.c vector.h
-	gcc $(CFLAGS) -c  $<
 
 tcv.o : tcv.h
 
