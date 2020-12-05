@@ -1,20 +1,20 @@
-# Fichiers C
-*.o
-*.out
-tp1
-tp2
-tcv.h
-# Fichiers Vim
-*.swo
-*.swp
 
-# Fichiers temporaires
-*.old
-*.tmp
 *.bak
-
-# répertoires
 bin/
 build/
-.idea/
 data/
+# Fichiers C
+# Fichiers temporaires
+# Fichiers Vim
+*.guy
+.idea/
+*.o
+*.old
+*.out
+# répertoires
+*.swo
+*.swp
+tcv.h
+*.tmp
+tp1
+tp2
