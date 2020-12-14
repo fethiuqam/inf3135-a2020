@@ -1,3 +1,4 @@
+#include "outil3.h"
 #include "malib.h"
 #include <stdio.h>
 
