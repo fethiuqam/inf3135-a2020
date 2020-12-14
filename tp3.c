@@ -15,11 +15,12 @@ int main (int argc , char* argv[] ){
         beacon.comptErreur[i] = 0 ;
         beacon.comptInvalide[i] = 0 ;
         beacon.cumulErreur[i] = 0 ;
+        beacon.infos[i] = 0;
     }
-    beacon.infoInvalide = false;
-    beacon.InfoDetail = false;
-    beacon.infoSommaire = false;
-    beacon.tranquille = false;
+    for (int i = 0; i < 6; ++i)
+        beacon.compteurTrx[i] = 0;
+    for (int i = 0; i < 4; ++i)
+        beacon.options[i] = false; 
 
     cmd(argc, argv, &beacon);
 
@@ -27,9 +28,11 @@ int main (int argc , char* argv[] ){
     while (fgets(ligne,  TAILLE , stdin) != NULL){
         traiterEntree(ligne , &beacon);
     }
-    if(!beacon.tranquille)
+    if(!beacon.options[3])
         finProgramme(&beacon);
-        
+    if(beacon.options[0])
+        afficherInfoInvalide(&beacon);
+
     freeV(&beacon.premierNiveau);
     return 0;
 }

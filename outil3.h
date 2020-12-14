@@ -18,13 +18,12 @@ typedef struct beacon_s {
     size_t timestamp, id;
     unsigned char puissance;
     float valeurs[3];
-    int comptValeurs[3],compteurTrx[6];
+    int comptValeurs[3],compteurTrx[6], infos[3];
     Vector premierNiveau;
     size_t comptInvalide[3];
     unsigned char comptErreur[3];
     size_t cumulErreur[3];
-    bool infoInvalide, InfoDetail, infoSommaire, tranquille;
-    int trxNonReconnue, trxNonSequentiel, trxValide, trxErreur;
+    bool options[4];
 } Beacon;
 
 void initV(Vector *vector, int capacity);
@@ -36,6 +35,6 @@ void freeV(Vector *vector);
 bool containV(Vector *vector, size_t value);
 
 float distance(int _signal, int _power);
-int cmd(int argc, char* argv[], Beacon* beacon);
+void cmd(int argc, char* argv[], Beacon* beacon);
 
 #endif

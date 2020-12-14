@@ -40,10 +40,10 @@ void traiterEntree(char *ligne, Beacon *beacon)
                 traiterEchangeDonnees(ligne, beacon);
             }
         }else
-            beacon->trxNonSequentiel++;
+            beacon->infos[1]++;
     }
     else
-        beacon->trxNonReconnue++;
+        beacon->infos[0]++;
 }
 
 void traiterIdentification(char *ligne, Beacon *beacon){
@@ -52,16 +52,16 @@ void traiterIdentification(char *ligne, Beacon *beacon){
     char vide[2], num[3];
     if (sscanf(ligne, "%zu %s %zu %hhu%s", &timestamp, num, &id, &puissance, vide) == 4){
         if (puissance < 2 || puissance > 4)
-            beacon->trxErreur++;
+            beacon->infos[2]++;
         else{
             beacon->id = id;
             beacon->puissance = puissance;
-            if(!beacon->tranquille)
+            if(!beacon->options[3])
                 printf("10 %zu %zu %u\n", timestamp, id, puissance);
             beacon->compteurTrx[0]++;
         }
     } else
-        beacon->trxErreur++;
+        beacon->infos[2]++;
 }
 
 void traiter_int_mesure(char *ligne, Beacon *beacon, bool (*f)(int), int i, int mult){
@@ -78,10 +78,10 @@ void traiter_int_mesure(char *ligne, Beacon *beacon, bool (*f)(int), int i, int 
 
             }else{
                 beacon->comptInvalide[i]++;
-                beacon->trxErreur++;
+                beacon->infos[2]++;
             }
         }else
-            beacon->trxErreur++;
+            beacon->infos[2]++;
 
     }
 }
@@ -99,10 +99,10 @@ void traiter_short_mesure(char *ligne, Beacon *beacon, bool (*f)(short), int i, 
                 beacon->compteurTrx[i+1]++;
             }else{
                 beacon->comptInvalide[i]++;
-                beacon->trxErreur++;
+                beacon->infos[2]++;
             }
         }else
-            beacon->trxErreur++;
+            beacon->infos[2]++;
     }
 }
 
@@ -112,7 +112,7 @@ void traiterErreur(Beacon *beacon, int index){
         beacon->cumulErreur[index]++;
     }else
         beacon->comptErreur[index]++;
-    beacon->trxErreur++;
+    beacon->infos[2]++;
 }
 
 void traiterSignal(char *ligne, Beacon *beacon){
@@ -127,13 +127,13 @@ void traiterSignal(char *ligne, Beacon *beacon){
             valide = validerSignal_3(signal);
         if(valide){
             appendV(&beacon->premierNiveau, id);
-            if(!beacon->tranquille)
+            if(!beacon->options[3])
                 printf("14 %zu %zu %.1f\n", timestamp, id, distance(signal, beacon->puissance));
             beacon->compteurTrx[4]++;
         }else
-            beacon->trxErreur++;
+            beacon->infos[2]++;
     }else
-        beacon->trxErreur++;
+        beacon->infos[2]++;
 }
 
 void traiterEchangeDonnees(char *ligne, Beacon *beacon){
@@ -142,7 +142,7 @@ void traiterEchangeDonnees(char *ligne, Beacon *beacon){
     if (sscanf(ligne, "%zu %s %zu %s", &timestamp, num, &id, vide) >= 3){
         if (!containV(&beacon->premierNiveau, id))
             appendV(&beacon->premierNiveau, id);
-        if(!beacon->tranquille){
+        if(!beacon->options[3]){
             printf("15 %zu %zu", timestamp, beacon->id);
             for (int i = 0; i < beacon->premierNiveau.size; i++)
                 printf(" %zu", beacon->premierNiveau.data[i]);
@@ -151,7 +151,7 @@ void traiterEchangeDonnees(char *ligne, Beacon *beacon){
         
         beacon->compteurTrx[5]++;
     }else
-        beacon->trxErreur++;
+        beacon->infos[2]++;
 }
 
 void finProgramme(Beacon *beacon){
@@ -174,4 +174,8 @@ unsigned int getBuildVersion(void){
     version_t version ;
     getVersion(&version);
     return version.build;
+}
+
+void afficherInfoInvalide(Beacon *beacon){
+    printf("information invalide\n  trx non reconnue : %d\n  trx avec ts non sequentiel : %d\n", beacon->infos[0], beacon->infos[1]);
 }
