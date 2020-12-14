@@ -144,11 +144,11 @@ void traiterEchangeDonnees(char *ligne, Beacon *beacon){
             appendV(&beacon->premierNiveau, id);
         if(!beacon->options[3]){
             printf("15 %zu %zu", timestamp, beacon->id);
+            trierTableau(&beacon->premierNiveau);
             for (int i = 0; i < beacon->premierNiveau.size; i++)
                 printf(" %zu", beacon->premierNiveau.data[i]);
             printf("\n");
         }    
-        
         beacon->compteurTrx[5]++;
     }else
         beacon->infos[2]++;

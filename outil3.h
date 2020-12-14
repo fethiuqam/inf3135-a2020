@@ -36,5 +36,7 @@ bool containV(Vector *vector, size_t value);
 
 float distance(int _signal, int _power);
 void cmd(int argc, char* argv[], Beacon* beacon);
+int compare(const void* a, const void* b);
+void trierTableau(Vector* tableau);
 
 #endif

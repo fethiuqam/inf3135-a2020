@@ -67,3 +67,10 @@ void cmd(int argc, char* argv[], Beacon* beacon){
             beacon->options[3] = true;
     }
 }
+
+int compare(const void* a, const void* b){
+    return ( *(size_t*)a - *(size_t*)b );
+}
+void trierTableau(Vector* tableau){
+    qsort(tableau->data, tableau->size, sizeof(size_t),compare);
+}
