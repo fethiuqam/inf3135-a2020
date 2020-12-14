@@ -187,3 +187,11 @@ void afficherInfoDetail(Beacon *beacon){
     printf("  le dernier ts lu : %zu\n", beacon->timestamp);
 }
 
+void afficherInfoSommaire(Beacon *beacon){
+    int trxValide =0, trxInvalide = 0;
+    for(int i = 0 ; i < 6 ; ++i)
+        trxValide += beacon->compteurTrx[i];
+    for(int i = 0 ; i < 3 ; ++i)
+        trxInvalide += beacon->infos[i];
+    printf("information sommaire\n  nbr trx valides : %d\n  nbr trx (total) : %d\n", trxValide, trxValide + trxInvalide);
+}

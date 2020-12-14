@@ -22,5 +22,6 @@ void afficherVersion(void);
 unsigned int getBuildVersion(void);
 void afficherInfoInvalide(Beacon *beacon);
 void afficherInfoDetail(Beacon *beacon);
+void afficherInfoSommaire(Beacon *beacon);
 
 #endif

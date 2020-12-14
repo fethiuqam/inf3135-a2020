@@ -5,7 +5,7 @@
 int main (int argc , char* argv[] ){
     char ligne[TAILLE];
     Beacon beacon;
-    beacon.timestamp = 0;
+    beacon.timestamp = 0; // debut initialisation beacon
     beacon.id = DEFAUT_ID;
     beacon.puissance = DEFAUT_PUISSANCE;
     initV(&beacon.premierNiveau, CAPACITY);
@@ -20,10 +20,8 @@ int main (int argc , char* argv[] ){
     for (int i = 0; i < 6; ++i)
         beacon.compteurTrx[i] = 0;
     for (int i = 0; i < 4; ++i)
-        beacon.options[i] = false; 
-
+        beacon.options[i] = false; // fin initialisation beacon
     cmd(argc, argv, &beacon);
-
     afficherVersion();
     while (fgets(ligne,  TAILLE , stdin) != NULL){
         traiterEntree(ligne , &beacon);
@@ -34,7 +32,8 @@ int main (int argc , char* argv[] ){
         afficherInfoInvalide(&beacon);
     if(beacon.options[1])
         afficherInfoDetail(&beacon);
-
+    if(beacon.options[2])
+        afficherInfoSommaire(&beacon);
     freeV(&beacon.premierNiveau);
     return 0;
 }
