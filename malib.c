@@ -56,7 +56,8 @@ void traiterIdentification(char *ligne, Beacon *beacon){
         else{
             beacon->id = id;
             beacon->puissance = puissance;
-            printf("10 %zu %zu %u\n", timestamp, id, puissance);
+            if(!beacon->tranquille)
+                printf("10 %zu %zu %u\n", timestamp, id, puissance);
             beacon->compteurTrx[0]++;
         }
     } else
@@ -126,7 +127,8 @@ void traiterSignal(char *ligne, Beacon *beacon){
             valide = validerSignal_3(signal);
         if(valide){
             appendV(&beacon->premierNiveau, id);
-            printf("14 %zu %zu %.1f\n", timestamp, id, distance(signal, beacon->puissance));
+            if(!beacon->tranquille)
+                printf("14 %zu %zu %.1f\n", timestamp, id, distance(signal, beacon->puissance));
             beacon->compteurTrx[4]++;
         }else
             beacon->trxErreur++;
@@ -140,10 +142,13 @@ void traiterEchangeDonnees(char *ligne, Beacon *beacon){
     if (sscanf(ligne, "%zu %s %zu %s", &timestamp, num, &id, vide) >= 3){
         if (!containV(&beacon->premierNiveau, id))
             appendV(&beacon->premierNiveau, id);
-        printf("15 %zu %zu", timestamp, beacon->id);
-        for (int i = 0; i < beacon->premierNiveau.size; i++)
-            printf(" %zu", beacon->premierNiveau.data[i]);
-        printf("\n");
+        if(!beacon->tranquille){
+            printf("15 %zu %zu", timestamp, beacon->id);
+            for (int i = 0; i < beacon->premierNiveau.size; i++)
+                printf(" %zu", beacon->premierNiveau.data[i]);
+            printf("\n");
+        }    
+        
         beacon->compteurTrx[5]++;
     }else
         beacon->trxErreur++;
