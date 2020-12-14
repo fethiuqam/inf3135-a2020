@@ -32,6 +32,8 @@ int main (int argc , char* argv[] ){
         finProgramme(&beacon);
     if(beacon.options[0])
         afficherInfoInvalide(&beacon);
+    if(beacon.options[1])
+        afficherInfoDetail(&beacon);
 
     freeV(&beacon.premierNiveau);
     return 0;

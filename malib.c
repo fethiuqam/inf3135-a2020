@@ -179,3 +179,11 @@ unsigned int getBuildVersion(void){
 void afficherInfoInvalide(Beacon *beacon){
     printf("information invalide\n  trx non reconnue : %d\n  trx avec ts non sequentiel : %d\n", beacon->infos[0], beacon->infos[1]);
 }
+
+void afficherInfoDetail(Beacon *beacon){
+    printf("information detaillee\n");
+    for(int i = 1 ; i < 6 ; ++i)
+        printf("  trx %2d : %d\n", i, beacon->compteurTrx[i]);
+    printf("  le dernier ts lu : %zu\n", beacon->timestamp);
+}
+

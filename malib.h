@@ -21,5 +21,6 @@ void finProgramme(Beacon* beacon);
 void afficherVersion(void);
 unsigned int getBuildVersion(void);
 void afficherInfoInvalide(Beacon *beacon);
+void afficherInfoDetail(Beacon *beacon);
 
 #endif
