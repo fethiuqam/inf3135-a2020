@@ -6,6 +6,7 @@
 
 #define CAPACITY 2
 #define CONST_M -69
+#define TAILLE 100
 
 typedef struct vector_s{
   int size;      // slots used so far
@@ -14,15 +15,16 @@ typedef struct vector_s{
 } Vector;
 
 typedef struct beacon_s {
-    size_t timestamp;
-    size_t id;
+    size_t timestamp, id;
     unsigned char puissance;
     float valeurs[3];
-    int comptValeurs[3];
+    int comptValeurs[3],compteurTrx[6];
     Vector premierNiveau;
     size_t comptInvalide[3];
     unsigned char comptErreur[3];
     size_t cumulErreur[3];
+    bool infoInvalide, InfoDetail, infoSommaire, tranquille;
+    int trxNonReconnue, trxNonSequentiel, trxValide, trxErreur;
 } Beacon;
 
 void initV(Vector *vector, int capacity);

@@ -2,12 +2,8 @@
 #include "malib.h"
 #include <stdio.h>
 
-
-
 int main (int argc , char* argv[] ){
-
     char ligne[TAILLE];
-    // initialisation de l'objet beacon 
     Beacon beacon;
     beacon.timestamp = 0;
     beacon.id = DEFAUT_ID;
@@ -20,16 +16,20 @@ int main (int argc , char* argv[] ){
         beacon.comptInvalide[i] = 0 ;
         beacon.cumulErreur[i] = 0 ;
     }
-    
-    afficherVersion();
+    beacon.infoInvalide = false;
+    beacon.InfoDetail = false;
+    beacon.infoSommaire = false;
+    beacon.tranquille = false;
 
+    cmd(argc, argv, &beacon);
+
+    afficherVersion();
     while (fgets(ligne,  TAILLE , stdin) != NULL){
         traiterEntree(ligne , &beacon);
     }
-
-    finProgramme(&beacon);
-    
+    if(!beacon.tranquille)
+        finProgramme(&beacon);
+        
     freeV(&beacon.premierNiveau);
-
     return 0;
 }

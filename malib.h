@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define TAILLE 100
 #define DEFAUT_ID 9999
 #define DEFAUT_PUISSANCE 2
 #define VERSION 1003

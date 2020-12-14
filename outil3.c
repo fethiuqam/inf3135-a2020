@@ -56,5 +56,15 @@ float distance(int _signal, int _power){
 }
 
 int cmd(int argc, char* argv[], Beacon* beacon){
+    for(int i = 1; i < argc; ++i){
+        if(strncmp(argv[i], "-i", 3) == 0)
+            beacon->infoInvalide = true;
+        else if (strncmp(argv[i], "-d", 3) == 0)
+            beacon->InfoDetail = true;
+        else if (strncmp(argv[i], "-s", 3) == 0)
+            beacon->infoSommaire = true;
+        else if (strncmp(argv[i], "-t", 3) == 0)
+            beacon->tranquille = true;
+    }
     return 0;
 }
