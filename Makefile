@@ -20,16 +20,12 @@ outil3.o : outil3.c outil3.h
 tcv.o : tcv.h
 
 tcv.h : lib
-	unzip -q -o ./data/tp3.zip -d ./
+	unzip -q -o ./data/*.zip -d ./  
 
 lib :
-	mkdir -p data && wget -q -O ./data/tp3.zip $(SOURCE)tp3.zip > /dev/null\
-		|| wget -q -O ./data/tp3.zip $(SOURCE)tp2.zip > /dev/null\
-		|| wget -q -O ./data/tp3.zip $(SOURCE)tp1.zip > /dev/null
+	wget -q -P data $(SOURCE)tp3.zip > /dev/null || wget -q -P data $(SOURCE)tp2.zip > /dev/null \
+		|| wget -q -P data $(SOURCE)tp1.zip > /dev/null
 	
-
-
-
 test-tp3 : tp3
 	./tp3
 
