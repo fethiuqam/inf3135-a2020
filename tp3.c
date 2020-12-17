@@ -15,12 +15,13 @@ int main (int argc , char* argv[] ){
         beacon.comptErreur[i] = 0 ;
         beacon.comptInvalide[i] = 0 ;
         beacon.cumulErreur[i] = 0 ;
-        beacon.infos[i] = 0;
     }
-    for (int i = 0; i < 6; ++i)
+    for (int i = 0; i < 5; ++i)
         beacon.compteurTrx[i] = 0;
-    for (int i = 0; i < 4; ++i)
-        beacon.options[i] = false; // fin initialisation beacon
+    for (int i = 0; i < 4; ++i){
+        beacon.options[i] = false; 
+        beacon.infos[i] = 0;
+    }        // fin initialisation beacon
     cmd(argc, argv, &beacon);
     afficherVersion();
     while (fgets(ligne,  TAILLE , stdin) != NULL){

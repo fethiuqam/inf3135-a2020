@@ -18,7 +18,7 @@ typedef struct beacon_s {
     size_t timestamp, id;
     unsigned char puissance;
     float valeurs[3];
-    int comptValeurs[3],compteurTrx[6], infos[3];
+    int comptValeurs[3],compteurTrx[5], infos[4];
     Vector premierNiveau;
     size_t comptInvalide[3];
     unsigned char comptErreur[3];

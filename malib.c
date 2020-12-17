@@ -5,12 +5,9 @@
 
 void traiterEntree(char *ligne, Beacon *beacon)
 {
-    char zero;
-    char noTrans;
+    char zero, noTrans, resteLigne[TAILLE];
     size_t timestamp;
-    char resteLigne[TAILLE];
-    int resultat;
-    resultat = sscanf(ligne, "%zu %c%c %s", &timestamp, &zero, &noTrans, resteLigne);
+    int resultat = sscanf(ligne, "%zu %c%c %s", &timestamp, &zero, &noTrans, resteLigne);
     if (resultat == 4 && zero == '0' && noTrans >= '0' && noTrans <= '5' ){
         if( timestamp >= beacon->timestamp){
             beacon->timestamp = timestamp;
@@ -58,7 +55,7 @@ void traiterIdentification(char *ligne, Beacon *beacon){
             beacon->puissance = puissance;
             if(!beacon->options[3])
                 printf("10 %zu %zu %u\n", timestamp, id, puissance);
-            beacon->compteurTrx[0]++;
+            beacon->infos[3]++;
         }
     } else
         beacon->infos[2]++;
@@ -74,7 +71,7 @@ void traiter_int_mesure(char *ligne, Beacon *beacon, bool (*f)(int), int i, int 
             if (f((int)(mesure * mult))){
                 beacon->valeurs[i] += mesure;
                 beacon->comptValeurs[i]++;
-                beacon->compteurTrx[i+1]++;
+                beacon->infos[3]++;
 
             }else{
                 beacon->comptInvalide[i]++;
@@ -82,8 +79,8 @@ void traiter_int_mesure(char *ligne, Beacon *beacon, bool (*f)(int), int i, int 
             }
         }else
             beacon->infos[2]++;
-
     }
+    beacon->compteurTrx[i]++;
 }
 
 void traiter_short_mesure(char *ligne, Beacon *beacon, bool (*f)(short), int i, int mult){
@@ -96,7 +93,7 @@ void traiter_short_mesure(char *ligne, Beacon *beacon, bool (*f)(short), int i, 
             if (f((short)(mesure * mult))){
                 beacon->valeurs[i] += mesure;
                 beacon->comptValeurs[i]++;
-                beacon->compteurTrx[i+1]++;
+                beacon->infos[3]++;
             }else{
                 beacon->comptInvalide[i]++;
                 beacon->infos[2]++;
@@ -104,6 +101,7 @@ void traiter_short_mesure(char *ligne, Beacon *beacon, bool (*f)(short), int i, 
         }else
             beacon->infos[2]++;
     }
+    beacon->compteurTrx[i]++;
 }
 
 void traiterErreur(Beacon *beacon, int index){
@@ -129,11 +127,12 @@ void traiterSignal(char *ligne, Beacon *beacon){
             appendV(&beacon->premierNiveau, id);
             if(!beacon->options[3])
                 printf("14 %zu %zu %.1f\n", timestamp, id, distance(signal, beacon->puissance));
-            beacon->compteurTrx[4]++;
+            beacon->infos[3]++;
         }else
             beacon->infos[2]++;
     }else
         beacon->infos[2]++;
+    beacon->compteurTrx[3]++;
 }
 
 void traiterEchangeDonnees(char *ligne, Beacon *beacon){
@@ -149,9 +148,10 @@ void traiterEchangeDonnees(char *ligne, Beacon *beacon){
                 printf(" %zu", beacon->premierNiveau.data[i]);
             printf("\n");
         }    
-        beacon->compteurTrx[5]++;
+        beacon->infos[3]++;
     }else
         beacon->infos[2]++;
+    beacon->compteurTrx[4]++;
 }
 
 void finProgramme(Beacon *beacon){
@@ -182,16 +182,14 @@ void afficherInfoInvalide(Beacon *beacon){
 
 void afficherInfoDetail(Beacon *beacon){
     printf("information detaillee\n");
-    for(int i = 1 ; i < 6 ; ++i)
-        printf("  trx %2d : %d\n", i, beacon->compteurTrx[i]);
+    for(int i = 0 ; i < 5 ; ++i)
+        printf("  trx %2d : %d\n", (i+1), beacon->compteurTrx[i]);
     printf("  le dernier ts lu : %zu\n", beacon->timestamp);
 }
 
 void afficherInfoSommaire(Beacon *beacon){
-    int trxValide =0, trxInvalide = 0;
-    for(int i = 0 ; i < 6 ; ++i)
-        trxValide += beacon->compteurTrx[i];
-    for(int i = 0 ; i < 3 ; ++i)
-        trxInvalide += beacon->infos[i];
-    printf("information sommaire\n  nbr trx valides : %d\n  nbr trx (total) : %d\n", trxValide, trxValide + trxInvalide);
+    int trxTotal = 0;
+    for(int i = 0 ; i < 4 ; ++i)
+        trxTotal += beacon->infos[i];
+    printf("information sommaire\n  nbr trx valides : %d\n  nbr trx (total) : %d\n", beacon->infos[3], trxTotal);
 }
