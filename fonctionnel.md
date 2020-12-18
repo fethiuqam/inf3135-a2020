@@ -10,7 +10,9 @@ version #: 0.1.1008
 21 37.3 -10.2 152
 22 1 1 1
 23 2 0 0
-\n~~~\ntest2 : ./tp3 -i < tests/test1.txt
+
+~~~
+test2 : ./tp3 -i < tests/test1.txt
 version #: 0.1.1008
 10 0 1005 3
 15 12000 1005 2000000
