@@ -1,4 +1,5 @@
-test1 : ./tp3 < tests/test1.txt
+### test1
+$ ./tp3 < tests/test1.txt
 ~~~
 
 version #: 0.1.1008
@@ -12,7 +13,10 @@ version #: 0.1.1008
 23 2 0 0
 
 ~~~
-test2 : ./tp3 -i < tests/test1.txt
+### test2
+$ ./tp3 -i < tests/test1.txt
+~~~
+
 version #: 0.1.1008
 10 0 1005 3
 15 12000 1005 2000000
@@ -25,7 +29,12 @@ version #: 0.1.1008
 information invalide
   trx non reconnue : 0
   trx avec ts non sequentiel : 0
-test3 : ./tp3 -d < tests/test1.txt
+
+~~~
+### test3
+$ ./tp3 -d < tests/test1.txt
+~~~
+
 version #: 0.1.1008
 10 0 1005 3
 15 12000 1005 2000000
@@ -42,7 +51,12 @@ information detaillee
   trx  4 : 2
   trx  5 : 2
   le dernier ts lu : 19511
-test4 : ./tp3 -s < tests/test1.txt
+
+~~~
+### test4
+$ ./tp3 -s < tests/test1.txt
+~~~
+
 version #: 0.1.1008
 10 0 1005 3
 15 12000 1005 2000000
@@ -55,9 +69,19 @@ version #: 0.1.1008
 information sommaire
   nbr trx valides : 11
   nbr trx (total) : 22
-test5 : ./tp3 -t < tests/test1.txt
+
+~~~
+### test5
+$ ./tp3 -t < tests/test1.txt
+~~~
+
 version #: 0.1.1008
-test6 : ./tp3 -d -s -i -t < tests/test2.txt
+
+~~~
+### test6
+$ ./tp3 -d -s -i -t < tests/test2.txt
+~~~
+
 version #: 0.1.1008
 information invalide
   trx non reconnue : 0
@@ -72,7 +96,12 @@ information detaillee
 information sommaire
   nbr trx valides : 12
   nbr trx (total) : 25
-test7 : ./tp3 < tests/test2.txt
+
+~~~
+### test7
+$ ./tp3 < tests/test2.txt
+~~~
+
 version #: 0.1.1008
 10 0 1005 3
 15 12000 1005 2000000
