@@ -88,6 +88,8 @@
    - Un fichier `README.md` contenant la description et les informations importante du projet
    - Un fichier `Makefile` responsable de la compilation et du téléchargement des sources, et supportant les appels `make`, `make clean`, `make lib`, `make default`, `make tp3`.
    - Un fichier `cp.txt` contenant le code permanent de l'auteur du projet;
+   - Un fichier YAML de test de compilation test-c.yml;
+   - Un fichier YAML de test fonctionnel test-f.yml;
 
    ## Références
 

@@ -15,8 +15,22 @@ jobs:
       run: make
 
     - name: tests
-      run: ./tp3 < tests/test1.txt > fonctionnel.md
-
+      run: |
+        echo "test1 : ./tp3 < tests/test1.txt" > fonctionnel.md
+        ./tp3 < tests/test1.txt >> fonctionnel.md
+        echo "test2 : ./tp3 -i < tests/test1.txt" >> fonctionnel.md
+        ./tp3 -i < tests/test1.txt >> fonctionnel.md
+        echo "test3 : ./tp3 -d < tests/test1.txt" >> fonctionnel.md
+        ./tp3 -d < tests/test1.txt >> fonctionnel.md
+        echo "test4 : ./tp3 -s < tests/test1.txt" >> fonctionnel.md
+        ./tp3 -s < tests/test1.txt >> fonctionnel.md
+        echo "test5 : ./tp3 -t < tests/test1.txt" >> fonctionnel.md
+        ./tp3 -t < tests/test1.txt >> fonctionnel.md
+        echo "test6 : ./tp3 -d -s -i -t < tests/test2.txt" >> fonctionnel.md
+        ./tp3 -d -s -i -t < tests/test2.txt >> fonctionnel.md
+        echo "test7 : ./tp3 < tests/test2.txt" >> fonctionnel.md
+        ./tp3 < tests/test2.txt >> fonctionnel.md
+        
     - name: push
       uses: actions-x/commit@v1
       with:
