@@ -1,4 +1,6 @@
-# Travail pratique 1
+# Travail pratique 3
+
+![test-c](https://github.com/fethiuqam/inf3135-a2020/workflows/test-c/badge.svg)
 
    ## Description
    
@@ -19,17 +21,32 @@
    - un numero à deux chiffres de 00 à 05 qui détermine le type de transaction.
    - une succession de valeurs qui diffère d'un type de transaction à un autre.
 
+   Le programme accepte 4 options qui modifient son affichage sur la sortie standard tel que :
+
+   - option -i information invalide
+      Lorsqu'un code de transaction n'est reconnu;
+      Lorsque le timestamp est inférieur au temps précédent;
+   - option -d information détaillée
+      Le nombre de transactions pour chacun des types de transactions;
+   - option -s information sommaire
+      Le nombre total de transactions valides;
+      Le nombre total de transactions reçues;
+   - option -t mode tranquille
+      Le mode tranquille n'affiche pas transaction en sortie;
+
    l'execution du programme peut se faire avec l'une des commandes suivantes : 
    
    ~~~~
-      $ ./tp2
+   # sans option
+   $ ./tp3
+   $ cat file.dat | ./tp3
+   $ head -n 100 file.txt| tail -n 25 | ./tp3
 
-      $ cat file.dat | ./tp2
-
-      $ ./script.sh | ./tp2
-
-      $ head -n 100 file.txt | ./tp2
-      ...
+   # avec option(s) de la ligne de commande (-d détaillé, -s sommaire, -t tranquille -i invalide)
+   $ ./tp3 -s -d -i
+   $ ./tp3 -s
+   $ ./tp3 -t
+   ...
    ~~~~
    
    Après le traitement des transactions par le programme, ce dernier peut émettre d'autres transactions sur la sortie standard stdout qui contiennent :
@@ -64,18 +81,12 @@
 
    ## Contenu du projet
 
-   - Un fichier `tp2.c` qui contient la fonction main.
-   - Les fichiers `malib.c` et `malib.h` qui contiennet toutes les fonctions et les structures utilisées dans le fichier `tp2.c`
+   - Un fichier `tp3.c` qui contient la fonction main.
+   - Les fichiers `malib.c` et `malib.h` qui contiennet les fonctions et les structures utilisées dans le fichier `tp3.c`
+   - Les fichiers `outil3.c` et `outil3.h` qui contiennet les fonctions et les structures utilisées par `malib.c` , `malib.h` et le fichier `tp3.c`
    - Un fichier `README.md` contenant la description et les informations importante du projet
-   - Un fichier `reflexion.md` qui démontre le processus de réflexion durant le travail; 
-   - Un fichier `Makefile` responsable de la compilation et du téléchargement des sources, et supportant les appels `make`, `make clean`, `make lib`, `make default`, `make tp1`, `make tp2`, `make test-tp1a`, `make test-tp1b`, `make test-tp2`;
+   - Un fichier `Makefile` responsable de la compilation et du téléchargement des sources, et supportant les appels `make`, `make clean`, `make lib`, `make default`, `make tp3`.
    - Un fichier `cp.txt` contenant le code permanent de l'auteur du projet;
-   - Un fichier `liste.sh` contenant le script qui filtre les fonctions qui réussissent les tests;
-   - Un fichier `tp1.c` contenant le code source du tp1;
-   
-   ## Processus de réflexion
-
-   - [Description de la reflexion](reflexion.md) au cours de la construction du tp2. 
 
    ## Références
 
