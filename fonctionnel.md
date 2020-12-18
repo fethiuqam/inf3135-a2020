@@ -84,7 +84,7 @@ $ ./tp3 -d -s -i -t < tests/test2.txt
 
 version #: 0.1.1008
 information invalide
-  trx non reconnue : 0
+  trx non reconnue : 1
   trx avec ts non sequentiel : 1
 information detaillee
   trx  1 : 11
@@ -95,7 +95,7 @@ information detaillee
   le dernier ts lu : 19511
 information sommaire
   nbr trx valides : 12
-  nbr trx (total) : 25
+  nbr trx (total) : 26
 
 ~~~
 ### test7
