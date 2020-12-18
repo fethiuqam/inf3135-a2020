@@ -18,7 +18,7 @@ jobs:
       run: |
         echo -e "test1 : ./tp3 < tests/test1.txt\n~~~\n" > fonctionnel.md
         ./tp3 < tests/test1.txt >> fonctionnel.md
-        echo- e "\n~~~\ntest2 : ./tp3 -i < tests/test1.txt" >> fonctionnel.md
+        echo -e "\n~~~\ntest2 : ./tp3 -i < tests/test1.txt" >> fonctionnel.md
         ./tp3 -i < tests/test1.txt >> fonctionnel.md
         echo "test3 : ./tp3 -d < tests/test1.txt" >> fonctionnel.md
         ./tp3 -d < tests/test1.txt >> fonctionnel.md
