@@ -1,6 +1,7 @@
 # Travail pratique 3
 
 ![test-c](https://github.com/fethiuqam/inf3135-a2020/workflows/test-c/badge.svg)
+![test-f](https://github.com/fethiuqam/inf3135-a2020/workflows/test-f/badge.svg)
 
    ## Description
    
