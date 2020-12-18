@@ -30,7 +30,6 @@ jobs:
         ./tp3 -d -s -i -t < tests/test2.txt >> fonctionnel.md
         echo -e "\n~~~\n### test7\n$ ./tp3 < tests/test2.txt\n~~~\n" >> fonctionnel.md
         ./tp3 < tests/test2.txt >> fonctionnel.md
-        echo -e "\n~~~"
         
     - name: push
       uses: actions-x/commit@v1
