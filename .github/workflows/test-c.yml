@@ -12,7 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: compilation  
-      run: make > compilation.md
+      run: |
+        echo -e "~~~\n" > compilation.md
+        make >> compilation.md
+        echo -e "\n~~~" >> compilation.md
 
     - name: push
       uses: actions-x/commit@v1
