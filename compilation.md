@@ -1,3 +1,5 @@
+~~~
+
 wget -q -P data https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp3.zip > /dev/null || wget -q -P data https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp2.zip > /dev/null \
 	|| wget -q -P data https://github.com/guyfrancoeur/INF3135_A2020/raw/master/tp/tp1.zip > /dev/null
 unzip -q -o ./data/*.zip -d ./  
