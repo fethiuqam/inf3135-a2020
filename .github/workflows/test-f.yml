@@ -1,0 +1,25 @@
+name: test-f
+on:
+  push:
+    branches: [ tp3 ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: compilation  
+      run: make
+
+    - name: tests
+      run: ./tp3 < tests/test1.txt > fonctionnel.md
+
+    - name: push
+      uses: actions-x/commit@v1
+      with:
+        name: GitHub Actions Autocommitter
+        branch: tp3
+        files: fonctionnel.md
