@@ -14,7 +14,6 @@ jobs:
     - name: compilation  
       run: |
         echo -e "~~~\n" > compilation.md
-        make >> compilation.md
         python3 hasha.py
 
     - name: push
