@@ -15,6 +15,7 @@ jobs:
       run: |
         echo -e "~~~\n" > compilation.md
         make >> compilation.md
+        python3 hasha.py
 
     - name: push
       uses: actions-x/commit@v1
