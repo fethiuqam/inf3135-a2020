@@ -1,0 +1,24 @@
+name: test-c
+on:
+  push:
+    branches: [ tp3 ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: compilation  
+      run: |
+        echo -e "~~~\n" > compilation.md
+        python3 hash1.py
+
+    - name: push
+      uses: actions-x/commit@v1
+      with:
+        name: GitHub Actions Autocommitter
+        branch: tp3
+        files: compilation.md
